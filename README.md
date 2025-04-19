@@ -9,7 +9,7 @@
 <body>
 
 <div class="header">
-    <h1>href="<a https://github.com/AABarabanov">[My GitHub Profile]</a></h1>
+    <h1><a href=" https://github.com/AABarabanov">[My GitHub Profile]</a></h1>
     <p>Здравствуйте, как поживаете?</p>
 </div>
 
