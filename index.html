@@ -115,6 +115,25 @@
     filter: drop-shadow(0 0 12px #6e44ff);
   }
 
+        .menu-item:hover::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  top: -40px;
+  transform: translateX(-50%);
+  background: #6e44ff;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  animation: fadeIn 0.3s;
+}
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+          to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
@@ -144,7 +163,7 @@
     </nav>
     
     <!-- Правый баннер -->
-    <a href="https://github.com/AABarabanov" class="banner-link">
+    <a href="https://github.com/AABarabanov" class="banner-link menu-item" data-tooltip="go 2 GitHub">
   <img src="assets/header.svg" alt="go 2 GitHub" class="corner-banner">
 </a>
     
