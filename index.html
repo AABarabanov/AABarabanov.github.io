@@ -3,43 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index</title>
+    <title>Шапка сайта</title>
     <style>
 
         body, html {
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden; 
         }
+        
+        .header {
+            width: 100%;
+            height: 100px; 
+            background: #f0f0f0; 
+            
 
-
-        .fullscreen-container {
-            width: 100vw;
-            height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            background: #000; 
+            justify-content: center; 
+            align-items: flex-start; /
+            
+            border-bottom: 1px solid #ccc; 
         }
+        
 
-
-        .responsive-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; 
-            min-width: 100%;
-            min-height: 100%;
+        .header-logo {
+            height: 80%; 
+            margin-top: 10px; 
         }
-
     </style>
 </head>
 <body>
 
-    <div class="fullscreen-container">
-        <img src="assets/header.svg" alt="Fullscreen Image" class="responsive-img">
+    <div class="header">
+        <img src="assets/header.svg" alt="Логотип" class="header-logo">
     </div>
-
+    
+    <!-- Остальной контент страницы -->
+    
+    <div class="content">
+        <h1>Основной контент</h1>
+        <p>Текст под шапкой...</p>
+    </div>
 </body>
 </html>
