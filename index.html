@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Dev Menu</title>
+    <title>index</title>
     <style>
         /* Базовые стили */
         body {
@@ -109,7 +109,11 @@
             z-index: 100;
             filter: drop-shadow(0 0 10px rgba(110, 68, 255, 0.7));
         }
-        
+
+        .banner-link:hover img {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 12px #6e44ff);
+  }
 
         @keyframes blink {
             0%, 100% { opacity: 1; }
@@ -140,6 +144,9 @@
     </nav>
     
     <!-- Правый баннер -->
-    <img src="assets/header.svg" alt="Cyber Banner" class="corner-banner">
+    <a href="#contacts" class="banner-link">
+  <img src="assets/header.svg" alt="go 2 GitHub" class="corner-banner">
+</a>
+    
 </body>
 </html>
