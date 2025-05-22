@@ -1,7 +1,37 @@
-<p style="margin: 0; padding: 0; width: 100vw; height: 100vh;">
-    <img src="assets/header.svg" alt="header" style="
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    ">
-</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullscreen Image</title>
+    <style>
+        /* Сброс стандартных отступов у body и html */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Убирает скролл, если изображение больше экрана */
+        }
+
+        /* Контейнер для изображения */
+        .fullscreen-container {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Стиль для изображения */
+        .fullscreen-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Масштабирует изображение с сохранением пропорций */
+            display: block; /* Убирает лишние отступы вокруг img */
+        }
+    </style>
+</head>
+<body>
+    <div class="fullscreen-container">
+        <img src="assets/header.svg" alt="Fullscreen Header" class="fullscreen-image">
+    </div>
+</body>
+</html>
