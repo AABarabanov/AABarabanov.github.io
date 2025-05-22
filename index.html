@@ -1,44 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index</title>
+    <title>Cyber Dev Menu</title>
     <style>
- 
-        body, html {
+        /* Базовые стили */
+        body {
             margin: 0;
-            padding: 0;
-            width: 100%;
-        }
-       
-        .site-header {
-            width: 100vw;      
-            height: auto;      
-            display: block;    
-            position: relative; 
+            background: #1c2333;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
         }
         
-        .site-header img {
-            width: 100%;       
-            height: auto;      
-            display: block;   
-        }   
-
-        .content {
-            padding: 20px;
-        }
-
+        /* Контейнер меню */
         .cyber-menu {
             width: 300px;
             height: 100vh;
             background: rgba(15, 15, 26, 0.8);
-            border-right: 1px solid #2a2a3a;
+            border-right: 1px solid #e0e0e0;
             position: fixed;
             backdrop-filter: blur(5px);
             padding-top: 50px;
+            z-index: 10;
         }
-
+        
+        /* Ава */
         .dev-avatar {
             width: 100px;
             height: 100px;
@@ -47,7 +35,7 @@
             margin: 0 auto 30px;
             display: block;
             object-fit: cover;
-            box-shadow: 0 0 15px #6e44ff;
+            box-shadow: 0 0 15px #e0e0e0;
             transition: 0.4s;
         }
         .dev-avatar:hover {
@@ -55,6 +43,7 @@
             box-shadow: 0 0 25px #6e44ff;
         }
 
+        /* КРУТЫЕ КНОПКИ */
         .menu-item {
             padding: 18px 30px;
             margin: 10px 20px;
@@ -63,40 +52,43 @@
             display: flex;
             align-items: center;
             border-left: 3px solid transparent;
-            transition: 0.3s;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             position: relative;
             overflow: hidden;
+            background: rgba(30, 30, 45, 0.3);
+            border-radius: 0 8px 8px 0;
         }
         
         .menu-item:hover {
             color: #ffffff;
-            background: rgba(110, 68, 255, 0.1);
+            background: rgba(110, 68, 255, 0.2);
             border-left: 3px solid #6e44ff;
-        }
-        
-        .menu-item.active {
-            color: #6e44ff;
-            font-weight: bold;
+            transform: translateX(10px);
+            box-shadow: 5px 0 15px rgba(110, 68, 255, 0.5);
         }
 
+        .menu-item.active {
+            color: #ffffff;
+            font-weight: bold;
+        }
+        
+        /* Анимация "голограммы" */
         .menu-item:before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
-            width: 50%;
+            width: 60%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(110, 68, 255, 0.2), transparent);
-            transition: 0.5s;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(110, 68, 255, 0.4), 
+                transparent);
+            transition: 0.6s;
         }
         
         .menu-item:hover:before {
-            left: 100%;
-        }
-
-        .menu-icon {
-            margin-right: 15px;
-            font-size: 20px;
+            left: 140%;
         }
 
         .menu-item.active:after {
@@ -106,55 +98,51 @@
             animation: blink 1s infinite;
         }
         
+
+
+        /* Правый баннер */
+        .corner-banner {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            z-index: 100;
+            filter: drop-shadow(0 0 10px rgba(110, 68, 255, 0.7));
+        }
+        
+
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
-
-        .cyber-menu:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(rgba(15, 15, 26, 0.9), rgba(15, 15, 26, 0.9)),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="1" height="1" x="20" y="20" fill="%232a2a3a"/></svg>');
-            z-index: -1;
-            opacity: 0.3;
-        }
-
-        
     </style>
 </head>
 <body>
-
-    <header class="site-header">
-        <img src="assets/header.svg" alt="Шапка">
-    </header>
-
+    <!-- Вертикальное меню -->
     <nav class="cyber-menu">
+        <!-- Аватарка  -->
+                
+        <img src="" alt="Dev Avatar" class="dev-avatar">
 
-        <!-- Аватарка 
-        <img src="https://***.png" alt="Dev Avatar" class="dev-avatar">
--->
 
+        <!-- КРУТЫЕ КНОПКИ -->
         <a href="#" class="menu-item active">
-            <span class="menu-icon">👨‍💻</span> Обо мне
+            <span class="menu-icon">👨‍💻</span> &nbsp;Обо мне
         </a>
         <a href="#" class="menu-item">
-            <span class="menu-icon">🚀</span> Проекты
+            <span class="menu-icon">🚀</span> &nbsp;Проекты
         </a>
         <a href="#" class="menu-item">
-            <span class="menu-icon">📝</span> Блог
+            <span class="menu-icon">🛠️</span> &nbsp;Навыки
         </a>
         <a href="#" class="menu-item">
-            <span class="menu-icon">📧</span> Контакты
+            <span class="menu-icon">📝</span> &nbsp;Блог
+        <a href="#" class="menu-item">
+            <span class="menu-icon">📧</span> &nbsp;Контакты
         </a>
     </nav>
-        
-    <main class="content">        
-    </main>
+    
+    <!-- Правый баннер -->
+    <img src="assets/header.svg" alt="Cyber Banner" class="corner-banner">
 </body>
 </html>
