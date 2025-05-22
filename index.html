@@ -5,43 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Шапка сайта</title>
     <style>
-
+ 
         body, html {
             margin: 0;
             padding: 0;
-        }
-        
-        .header {
             width: 100%;
-            height: 100px; 
-            background: #f0f0f0; 
-            
-
-            display: flex;
-            justify-content: center; 
-            align-items: flex-start; /
-            
-            border-bottom: 1px solid #ccc; 
+        }
+        
+       
+        .site-header {
+            width: 100vw;      
+            height: auto;      
+            display: block;    
+            position: relative; 
+        }
+        
+        /* 3. Стили для SVG-изображения */
+        .site-header img {
+            width: 100%;       
+            height: auto;      
+            display: block;   
         }
         
 
-        .header-logo {
-            height: 80%; 
-            margin-top: 10px; 
+        .content {
+            padding: 20px;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <img src="assets/header.svg" alt="Логотип" class="header-logo">
-    </div>
+    <header class="site-header">
+        <img src="assets/header.svg" alt="Шапка сайта">
+    </header>
     
-    <!-- Остальной контент страницы -->
+    <!-- Остальной контент -->
     
-    <div class="content">
-        <h1>Основной контент</h1>
+    <main class="content">
+        <h1>Основное содержимое</h1>
         <p>Текст под шапкой...</p>
-    </div>
+    </main>
 </body>
 </html>
