@@ -216,12 +216,6 @@
     <div id="footer-container"></div>
 
     <script>
-        // Подгрузка футера
-        fetch('m/footer.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('footer-container').innerHTML = html;
-            });
 
         // Управление меню
         const menuToggle = document.querySelector('.menu-toggle');
