@@ -22,42 +22,45 @@
             border-right: 1px solid #6e44ff;
             position: fixed;
             backdrop-filter: blur(8px);
-            padding-top: 20px;
             z-index: 100;
             left: -280px;
             transition: left 0.3s ease-in-out;
             box-shadow: 0 0 30px rgba(110, 68, 255, 0.4);
-            
-            /* Прокрутка */
-            overflow-y: auto;
-            overflow-x: hidden;
-            scrollbar-width: thin;
-            scrollbar-color: #6e44ff rgba(15, 15, 26, 0.5);
-        }
-
-        /* Стилизация скроллбара */
-        .cyber-menu::-webkit-scrollbar {
-            width: 5px;
-        }
-        .cyber-menu::-webkit-scrollbar-track {
-            background: rgba(15, 15, 26, 0.5);
-        }
-        .cyber-menu::-webkit-scrollbar-thumb {
-            background-color: #6e44ff;
-            border-radius: 3px;
+            display: flex;
+            flex-direction: column;
         }
 
         .cyber-menu.active {
             left: 0;
         }
 
-        /* Обертка для контента меню */
-        .menu-content {
-            min-height: calc(100vh - 20px);
-            padding-bottom: 40px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
+        /* Основное содержимое меню с прокруткой */
+        .menu-scrollable {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 0;
+            padding-top: 70px;
+        }
+
+        /* Футер меню (фиксированный снизу) */
+        .menu-footer {
+            padding: 5px 20px;
+            font-size: 12px;
+            text-align: center;
+            color: rgba(176, 176, 192, 0.7);
+ 
+        }
+
+        /* Стилизация скроллбара */
+        .menu-scrollable::-webkit-scrollbar {
+            width: 5px;
+        }
+        .menu-scrollable::-webkit-scrollbar-track {
+            background: rgba(15, 15, 26, 0.5);
+        }
+        .menu-scrollable::-webkit-scrollbar-thumb {
+            background-color: #6e44ff;
+            border-radius: 3px;
         }
 
         /* Кнопка бургера */
@@ -107,19 +110,6 @@
             width: 110%;
         }
 
-        /* Аватар */
-        .dev-avatar {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 2px solid #6e44ff;
-            margin: 10px auto 20px;
-            display: block;
-            object-fit: cover;
-            box-shadow: 0 0 15px #6e44ff;
-            transition: 0.4s;
-        }
-
         /* Пункты меню */
         .menu-item {
             padding: 12px 20px;
@@ -134,7 +124,6 @@
             background: rgba(30, 30, 45, 0.3);
             border-radius: 0 6px 6px 0;
             font-size: 14px;
-            flex-shrink: 0;
         }
 
         .menu-item:hover {
@@ -146,7 +135,7 @@
         }
 
         .menu-item.home {
-            margin-top: 45px;
+            margin-top: 0;
             background: rgba(110, 68, 255, 0.1);
             border-left: 2px solid #e0e0e0;
         }
@@ -154,16 +143,14 @@
         /* Кнопка Desktop version */
         .desktop-version-btn {
             opacity: 0.6;
-            margin-top: auto; /* Прижимаем к низу */
-            margin-bottom: 20px;
+            margin: 20px 10px 10px;
             font-size: 13px;
             background: none !important;
             border-left: 2px solid transparent !important;
+            display: block;
         }
         .desktop-version-btn:hover {
             opacity: 0.9;
-            transform: none !important;
-            box-shadow: none !important;
         }
 
         /* Правый баннер */
@@ -182,7 +169,6 @@
                 width: 240px;
                 left: -240px;
             }
-
             .corner-banner {
                 width: 80px;
             }
@@ -199,7 +185,7 @@
 
     <!-- Вертикальное меню -->
     <nav class="cyber-menu">
-        <div class="menu-content">
+        <div class="menu-scrollable">
             <a href="index.html" class="menu-item home">
                 <span class="menu-icon">⌂</span> &nbsp;INDEX.html
             </a>
@@ -215,11 +201,16 @@
             <a href="contacts.html" class="menu-item">
                 <span class="menu-icon">📧</span> &nbsp;>_Contact
             </a>
-            
+
             <!-- Кнопка Desktop version -->
             <a href="#" class="menu-item desktop-version-btn">
                 <span class="menu-icon">🖥️</span> &nbsp;Desktop version
             </a>
+        </div>
+
+        <!-- Футер меню -->
+        <div class="menu-footer">
+            © 2025 | Feel free to copy anything*
         </div>
     </nav>
 
@@ -228,16 +219,7 @@
         <img src="m/assets/header.svg" alt="GitHub" class="corner-banner">
     </a>
 
-    <div id="footer-container"></div>
-
     <script>
-        // Подгрузка футера
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('footer-container').innerHTML = html;
-            });
-
         // Управление меню
         const menuToggle = document.querySelector('.menu-toggle');
         const cyberMenu = document.querySelector('.cyber-menu');
@@ -263,7 +245,12 @@
             e.stopPropagation();
         });
 
-        
+        // Обработчик для кнопки Desktop version
+        document.querySelector('.desktop-version-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Здесь можно добавить переход на десктопную версию
+            console.log('Switching to desktop version');
+        });
     </script>
 </body>
 </html>
