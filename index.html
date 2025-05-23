@@ -175,25 +175,19 @@
   <img src="assets/header.svg" alt="go 2 GitHub" class="corner-banner">
 </a>
     
-</body>
 
+<div id="footer-container"></div>
 
-
-<footer style="position: fixed; bottom: 0; left: 0; right: 0; width: 100%; text-align: center; padding: 12px 0; background: rgba(15, 15, 26, 0.9);
-  border-top: 1px solid #6e44ff; backdrop-filter: blur(5px); z-index: 100; font-family: 'Courier New', monospace;">
-    <div style="display: inline-flex; align-items: center; gap: 8px; color: #b0b0c0; font-size: 0.45em;">  <!--Размер шрифта (изначально 9)-->
-        <span>&nbsp;&nbsp;&nbsp<span>
-        <span style="color: #6e44ff;">©</span>
-        <span id="current-year"> yyyy </span>
-        <span style="color: #6e44ff;">|</span>
-
-        <span>Content can be copied. But if you steal it and get rich, I'll find you through SELECT * FROM hackers WHERE karma < 0;&nbsp;&nbsp;&nbsp;</span>
-
-    <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-    </script>
-</footer>
-
-
+<script>
+  // Подгружаем футер
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById('footer-container').innerHTML = html;
+    })
+    .catch(error => console.error('Не загрузился футер:', error));
+</script>
 	
+	
+</body>
 </html>
