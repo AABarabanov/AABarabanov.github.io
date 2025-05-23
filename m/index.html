@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <style>
+        /* Базовые стили */
+        body {
+            margin: 0;
+            background: #1c2333;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+        }
+
+ 
+
+        /* Ава */
+        .dev-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid #6e44ff;
+            margin: 0 auto 30px;
+            display: block;
+            object-fit: cover;
+            box-shadow: 0 0 15px #e0e0e0;
+            transition: 0.4s;
+        }
+        .dev-avatar:hover {
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: 0 0 25px #6e44ff;
+        }
+
+        /* КРУТЫЕ КНОПКИ */
+        .menu-item {
+            padding: 18px 30px;
+            margin: 10px 20px;
+            color: #b0b0c0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            border-left: 3px solid transparent;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            position: relative;
+            overflow: hidden;
+            background: rgba(30, 30, 45, 0.3);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .menu-item:hover {
+            color: #ffffff;
+            background: rgba(110, 68, 255, 0.2);
+            border-left: 3px solid #6e44ff;
+            transform: translateX(10px);
+            box-shadow: 5px 0 15px rgba(110, 68, 255, 0.5);
+        }
+
+        .menu-item.active {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        /* Анимация "голограммы" */
+        .menu-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(110, 68, 255, 0.4), 
+                transparent);
+            transition: 0.6s;
+        }
+
+        .menu-item:hover:before {
+            left: 140%;
+        }
+
+        .menu-item.active:after {
+            content: '>';
+            position: absolute;
+            right: 20px;
+            animation: blink 1s infinite;
+        }
+
+
+
+        /* Правый баннер */
+        .corner-banner {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            z-index: 100;
+            filter: drop-shadow(0 0 10px rgba(110, 68, 255, 0.7));
+        }
+
+        .banner-link:hover img {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 12px #6e44ff);
+  }
+
+        .minimal-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            text-decoration: none;
+            padding: 6px 12px;
+            transition: all 0.25s;
+            }
+            .minimal-link:hover {
+            color: #6e44ff;
+            }
+            .minimal-link:hover svg {
+            transform: translateX(2px);
+            stroke: #6e44ff;
+            }
+
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Вертикальное меню -->
+
+    <a href="index.html" class="minimal-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"          stroke="#e0e0e0" stroke-width="2" stroke-linecap="round">
+            <path d="M3 12L21 12M21 12L12 3M21 12L12 21"/>
+        </svg>
+        <span>INDEX.html</span>
+    </a>
+
+    <nav class="cyber-menu">
+
+<!-- Круг для аватара  
+        <img src="" alt="go 2 index.html" class="dev-avatar"> -->
+
+        <!-- КРУТЫЕ КНОПКИ -->
+
+        <!-- Для активной кнопки <a href="#" class="menu-item active"> -->
+        <a href="projects.html" class="menu-item">    
+            <span class="menu-icon">🚀</span> &nbsp;Projects
+        </a>
+
+        <a href="blog.html" class="menu-item">
+            <span class="menu-icon">📝</span> &nbsp;Blog
+
+        <a href="contacts.html" class="menu-item">
+            <span class="menu-icon">📧</span> &nbsp;>_Contact
+        </a>
+    </nav>
+
+    <!-- Правый баннер -->
+    <a href="https://github.com/AABarabanov" title="go 2 GitHub" class="banner-link">
+  <img src="assets/header.svg" alt="go 2 GitHub" class="corner-banner">
+</a>
+
+
+<div id="footer-container"></div>
+
+<script>
+  // Подгружаем футер
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById('footer-container').innerHTML = html;
+    })
+    .catch(error => console.error('Не загрузился футер:', error));
+</script>
+
+
+</body>
+</html>
