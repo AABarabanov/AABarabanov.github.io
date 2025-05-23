@@ -151,6 +151,21 @@
             border-left: 2px solid #e0e0e0;
         }
 
+        /* Кнопка Desktop version */
+        .desktop-version-btn {
+            opacity: 0.6;
+            margin-top: auto; /* Прижимаем к низу */
+            margin-bottom: 20px;
+            font-size: 13px;
+            background: none !important;
+            border-left: 2px solid transparent !important;
+        }
+        .desktop-version-btn:hover {
+            opacity: 0.9;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
         /* Правый баннер */
         .corner-banner {
             position: fixed;
@@ -201,10 +216,10 @@
                 <span class="menu-icon">📧</span> &nbsp;>_Contact
             </a>
             
-            
-
-   
-            
+            <!-- Кнопка Desktop version -->
+            <a href="#" class="menu-item desktop-version-btn">
+                <span class="menu-icon">🖥️</span> &nbsp;Desktop version
+            </a>
         </div>
     </nav>
 
@@ -216,6 +231,12 @@
     <div id="footer-container"></div>
 
     <script>
+        // Подгрузка футера
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('footer-container').innerHTML = html;
+            });
 
         // Управление меню
         const menuToggle = document.querySelector('.menu-toggle');
@@ -240,6 +261,13 @@
         // Предотвращение закрытия при клике на само меню
         cyberMenu.addEventListener('click', (e) => {
             e.stopPropagation();
+        });
+
+        // Обработчик для кнопки Desktop version
+        document.querySelector('.desktop-version-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Desktop version would load here');
+            // window.location.href = '/desktop-version'; // Раскомментировать для реального использования
         });
     </script>
 </body>
