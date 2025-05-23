@@ -42,6 +42,18 @@
         .menu-item.active {
             color: #ffffff;
             font-weight: bold;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background:     linear-gradient(90deg, 
+                transparent, 
+                rgba(110, 68, 255, 0.4), 
+                transparent);
+            transition: 0.6s;
+        }
         }
 
         /* Анимация "голограммы" */
@@ -115,14 +127,14 @@
 
         <!-- Для активной кнопки <a href="#" class="menu-item active"> -->
         <a href="projects.html" class="menu-item active">    
-            <span class="menu-icon active">🚀</span> &nbsp;Projects
+            <span class="menu-icon">🚀</span> &nbsp;Projects
         </a>
 
-        <a href="blog.html" class="menu-item">
+        <a href="blog.html" class="menu-item active">
             <span class="menu-icon">📝</span> &nbsp;Blog
 
-        <a href="contacts.html" class="menu-item">
-            <span class="menu-icon active">📧</span> &nbsp;>_Contact
+        <a href="contacts.html" class="menu-item active">
+            <span class="menu-icon">📧</span> &nbsp;>_Contact
         </a>
     </nav>
 
