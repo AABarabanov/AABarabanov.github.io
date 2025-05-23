@@ -115,6 +115,25 @@
     filter: drop-shadow(0 0 12px #6e44ff);
   }
 
+        .minimal-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            text-decoration: none;
+            padding: 6px 12px;
+            transition: all 0.25s;
+            }
+            .minimal-link:hover {
+            color: #6e44ff;
+            }
+            .minimal-link:hover svg {
+            transform: translateX(2px);
+            stroke: #6e44ff;
+            }
+
+
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
@@ -124,16 +143,20 @@
 <body>
     <!-- Вертикальное меню -->
     <nav class="cyber-menu">
-        <!-- Аватарка  -->
-                
-        <img src="" alt="Dev Avatar" class="dev-avatar">
+        <!-- На главную  
+        <img src="" alt="go 2 index.html" class="dev-avatar"> -->
+
+            <a href="index.html" class="minimal-link">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" stroke-width="2" stroke-linecap="round">
+    <path d="M3 12L21 12M21 12L12 3M21 12L12 21"/>
+  </svg>
+  <span>INDEX</span>
+</a>
 
 
         <!-- КРУТЫЕ КНОПКИ -->
+
         <a href="#" class="menu-item active">
-            <span class="menu-icon">👨‍💻</span> &nbsp;AboutMe
-        </a>
-        <a href="#" class="menu-item">
             <span class="menu-icon">🚀</span> &nbsp;Projects
         </a>
         <a href="#" class="menu-item">
