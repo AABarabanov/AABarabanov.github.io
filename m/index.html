@@ -141,22 +141,35 @@
             box-shadow: 0 0 15px rgba(110, 68, 255, 0.5);
         }
 
-        /* Кнопка Desktop version */
         .desktop-version-btn {
-            opacity: 0.6;
-            margin: 20px 10px 20px;
-            font-size: 13px;
-            background: transparent !important;
-            border-left: none ! important;
-            display: block;
-            color: #b0b0c0;
-        }
-        .desktop-version-btn:hover {
-            opacity: 0.9;
-        }
+    
+    background: transparent !important;
+    border-left: none !important;
+    box-shadow: none !important;
+    
+    
+    opacity: 0.6;
+    margin: 20px 10px 5px;
+    font-size: 13px;
+    display: block;
+    color: #b0b0c0;
+    
+    
+}
+
+.desktop-version-btn:hover {
+    margin-top: 20px;
+    opacity: 0.9;
+    
+    background: transparent !important;
+    border-left: none !important;
+    box-shadow: none !important;
+}
+
 
         
         .menu-footer {
+        margin-top: 30px;
             padding: 0 20px 20px;
             font-size: 12px;
             text-align: center;
@@ -274,11 +287,7 @@
             e.stopPropagation();
         });
 
-        // Обработчик для кнопки Desktop version
-        document.querySelector('.desktop-version-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log('Switching to desktop version');
-        });
+        
     </script>
 </body>
 </html>
