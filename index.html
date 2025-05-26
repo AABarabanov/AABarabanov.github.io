@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    
+<script>
+  // комбинированная проверка
+  function checkDevice() {
+    const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const isTablet = /iPad|Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
+    
+    if (isMobile && !isTablet) {
+      window.location.href = "aabarabanov.github.io./m/index.html";
+    }
+  }
+  
+  // Задержка для корректного определения на некоторых устройствах
+  setTimeout(checkDevice, 100);
+</script>
+	
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index</title>
     <style>
+	    
         /* Базовые стили */
         body {
             margin: 0;
