@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index</title>
+    <title>blog</title>
     <style>
         /* Базовые стили */
         body {
@@ -26,22 +26,7 @@
             z-index: 10;
         }
         
-        /* Ава */
-        .dev-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 2px solid #6e44ff;
-            margin: 0 auto 30px;
-            display: block;
-            object-fit: cover;
-            box-shadow: 0 0 15px #e0e0e0;
-            transition: 0.4s;
-        }
-        .dev-avatar:hover {
-            transform: rotate(15deg) scale(1.1);
-            box-shadow: 0 0 25px #6e44ff;
-        }
+       
 
         /* КРУТЫЕ КНОПКИ */
         .menu-item {
@@ -98,23 +83,6 @@
             animation: blink 1s infinite;
         }
         
-
-
-        /* Правый баннер */
-        .corner-banner {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 150px;
-            z-index: 100;
-            filter: drop-shadow(0 0 10px rgba(110, 68, 255, 0.7));
-        }
-
-        .banner-link:hover img {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 12px #6e44ff);
-  }
-
         .minimal-link {
             display: inline-flex;
             align-items: center;
@@ -214,7 +182,7 @@
 	    <span class="menu-icon">🚀</span> &nbsp;Projects
         </a>
 	    
-        <a href="blog.html" class="menu-item">
+        <a href="blog.html" class="menu-item active">
             <span class="menu-icon">📝</span> &nbsp;Blog
 		
         <a href="contacts.html" class="menu-item">
