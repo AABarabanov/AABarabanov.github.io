@@ -162,20 +162,46 @@
             color: rgba(176, 176, 192, 0.7);
         }
 
-        /* Новые стили для контента и карточек */
+        /* Стили для контента */
         .content-wrapper {
             margin-left: 300px;
             padding: 30px;
             transition: margin-left 0.3s ease-in-out;
         }
 
+        /* Стили для заголовка /blog */
+        .blog-header {
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+
+        .blog-header h1 {
+            font-size: 2.5rem;
+            color: #6e44ff;
+            margin: 0;
+            padding: 0;
+            text-shadow: 0 0 10px rgba(110, 68, 255, 0.5);
+            position: relative;
+            display: inline-block;
+        }
+
+        .blog-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #6e44ff, transparent);
+        }
+
+        /* Стили для сетки статей */
         .articles-grid {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
-            padding-top: 50px;
         }
 
         .article-card {
@@ -269,12 +295,8 @@
                 left: -240px;
             }
             
-            .corner-banner {
-                width: 80px;
-            }
-            
-            .menu-scrollable {
-                padding-top: 60px;
+            .blog-header h1 {
+                font-size: 2rem;
             }
             
             .articles-grid {
@@ -289,6 +311,10 @@
             
             .article-title {
                 font-size: 1.2em;
+            }
+            
+            .blog-header h1 {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -329,17 +355,16 @@
         </div>
     </nav>
 
-
-
     <!-- Контент с карточками -->
     <div class="content-wrapper">
+        <!-- Заголовок /blog -->
+        <div class="blog-header">
+            <h1>/blog</h1>
+        </div>
+
         <div class="articles-grid">
-           
-            <!-- Список статей -->
-            
-<!-- AI — зеркало пользователя -->
+            <!-- Статья -->
             <a href="articles/ai_as_your_digital_mirror.html" class="article-card">
-           <!-- <div class="article-card">-->
                 <div class="article-meta">
                     <span>18.05.2025</span>
                     <span>2 мин</span>
@@ -352,12 +377,7 @@
                     <span class="article-tag">#ПсихологияТехнологий</span>
                     <span class="article-tag">#Этика</span>
                 </div>
-           <!-- </div>-->
             </a>
-
-
-
-
         </div>
     </div>
 
