@@ -138,17 +138,16 @@
 
         /* Карточка статьи */
         .article-card {
-            background: rgba(15, 15, 26, 0.7);
+            max-width: 100%; 
+     	    box-sizing: border-box;
+	    background: rgba(15, 15, 26, 0.7);
             border-left: 3px solid #6e44ff;
             padding: 20px;
             margin-bottom: 25px;
             transition: all 0.3s ease;
             cursor: pointer;
-        }
-
-        .article-card:hover {
-            background: rgba(30, 30, 45, 0.9);
-            box-shadow: 0 0 15px rgba(110, 68, 255, 0.3);
+	    overflow-wrap: break-word;
+            word-break: break-word;
         }
 
         .article-title {
@@ -166,11 +165,8 @@
 
         .article-excerpt {
             line-height: 1.5;
+	}
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
 
         .menu-item:hover {
             background: rgba(110, 68, 255, 0.3);
@@ -204,24 +200,12 @@
 }
 
 
-        
         .menu-footer {
         margin-top: 30px;
             padding: 0 20px 20px;
             font-size: 12px;
             text-align: center;
             color: rgba(176, 176, 192, 0.7);
-        }
-
-       
-
-        .corner-banner {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 150px;
-            z-index: 100;
-            filter: drop-shadow(0 0 10px rgba(110, 68, 255, 0.7));
         }
 
         @media (max-width: 480px) {
@@ -286,10 +270,10 @@
                 <span class="menu-icon">🖥️</span> &nbsp;Desktop version
             </a>
 
-            <!-- Футер меню -->
+            <!-- Футер меню 
             <div class="menu-footer">
                 © 2025 | Feel free to copy anything*
-            </div>
+            </div> -->
         </div>
     </nav>
 
