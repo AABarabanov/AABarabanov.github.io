@@ -69,27 +69,103 @@
             stroke: #6e44ff;
         }
 
+
+
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
+        }
+
+
+        .repo-card {
+            background: rgba(30, 30, 45, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 600px;
+            border-left: 3px solid #6e44ff;
+            transition: all 0.3s ease;
+        }
+        
+        .repo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(110, 68, 255, 0.2);
+        }
+        
+        .repo-title {
+            color: #ffffff;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .repo-description {
+            color: #b0b0c0;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .repo-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #6e44ff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid #6e44ff;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .repo-link:hover {
+            background: rgba(110, 68, 255, 0.1);
+        }
+        
+        .repo-stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            color: #7a7a8c;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
     
     <a href="index.html" class="minimal-link">
-	      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"  	stroke="#e0e0e0" stroke-width="2" stroke-linecap="round">
-    	      <path d="M3 12L21 12M21 12L12 3M21 12L12 21"/>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"   stroke="#e0e0e0" stroke-width="2" stroke-linecap="round">
+              <path d="M3 12L21 12M21 12L12 3M21 12L12 21"/>
         </svg>
         <span>INDEX.html</span>
     </a>
 
 <header class="menu-item active">🚀&nbsp;Projects</header>
     
-    <!-- Правый баннер 
-    <a href="https://github.com/AABarabanov" title="go 2 GitHub" class="banner-link">
-        <img src="assets/header.svg" alt="go 2 GitHub" class="corner-banner">
-    </a> -->
+<!-- Карточку репозитория 1-->
+    <div class="repo-card">
+        <div class="repo-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6e44ff" stroke-width="2">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.09.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+            </svg>
+            LehaProfile (for Entrepreneurs)
+        </div>
+        <div class="repo-description">
+            📌 Микросервис для предпринимателей | Хранение профилей + валидация данных
+        </div>
+        <a href="https://github.com/AABarabanov/LProfile4Entrs" class="repo-link" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+            Открыть на GitHub
+        </a>
+        <div class="repo-stats">
+            <span>📅 Последнее обновление: 26.06.2025</span>
+        </div>
+    </div>
     
 <div id="footer-container"></div>
 
@@ -102,6 +178,6 @@
     })
     .catch(error => console.error('Не загрузился футер:', error));
 </script>
-	
+    
 </body>
 </html>
