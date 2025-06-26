@@ -336,6 +336,32 @@
                 font-size: 0.9em;
             }
         }
+
+/* Стили для заголовка /blog */
+        .blog-header {
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+
+        .blog-header h1 {
+            font-size: 2.5rem;
+            color: #6e44ff;
+            margin: 0;
+            padding: 0;
+            text-shadow: 0 0 10px rgba(110, 68, 255, 0.5);
+            position: relative;
+            display: inline-block;
+        }
+
+        .blog-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #6e44ff, transparent);
+        }
         
     </style>
 </head>
@@ -379,12 +405,13 @@
     </nav>
 
         <!-- Основное содержимое страницы Карточка 1-->
-    <div class="repo-grid">
-        
-        <!-- Заголовок /blog -->
+
+            <!-- Заголовок /blog -->
         <div class="blog-header">
             <h1>&ensp;&ensp;&ensp;&ensp;/projects</h1>
         </div>
+    
+    <div class="repo-grid">
         
         <div class="repo-card">
             <div class="repo-header">
