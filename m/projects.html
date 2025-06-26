@@ -215,8 +215,8 @@
                 width: 80px;
             }
         }
-        
-        
+
+
         /* стили для карточки */
         .repo-grid {
             display: grid;
@@ -270,7 +270,7 @@
 
         .repo-description {
             color: #b0b0c0;
-            font-size: 0.95em;
+            font-size: 0.8em;
             line-height: 1.5;
             margin-bottom: 15px;
         }
@@ -325,15 +325,15 @@
             .repo-grid {
                 padding: 0px 30px 15px;
             }
-            
+
             /*.repo-card {
                 padding: 15px;
             }*/
-            
+
             .repo-title {
                 font-size: 1.5em;
             }
-            
+
             .repo-description {
                 font-size: 0.9em;
             }
@@ -364,7 +364,7 @@
             height: 2px;
             background: linear-gradient(90deg, #6e44ff, transparent);
         }
-        
+
     </style>
 </head>
 <body>
@@ -406,26 +406,30 @@
         </div>
     </nav>
 
-        <!-- Основное содержимое страницы Карточка 1-->
+        <!-- Основное содержимое -->
 
             <!-- Заголовок /blog -->
         <div class="blog-header">
             <h1>&ensp;&ensp;&ensp;&ensp;/projects</h1>
         </div>
-    
+
     <div class="repo-grid">
-        
+
+
+<!-- карточка LehaMnemo -->
+
         <div class="repo-card">
             <div class="repo-header">
 
-                <h2 class="repo-title">LehaProfile (for Entrepreneurs)</h2>
+                <h2 class="repo-title">LehaMnemo</h2>
             </div>
-            
+
             <p class="repo-description">
-                📌 Микросервис для предпринимателей | Хранение профилей + валидация данных
+ Мощный инструмент для запоминания, вдохновленный Anki, но с фокусом на минимализм и эффективность
+
             </p>
-            
-            <a href="https://github.com/AABarabanov/LProfile4Entrs" class="repo-link" target="_blank">
+
+            <a href="https://github.com/AABarabanov/LehaMnemo" class="repo-link" target="_blank">
                 <svg class="repo-link-icon" viewBox="0 0 24 24">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
                     <polyline points="15 3 21 3 21 9"/>
@@ -433,10 +437,10 @@
                 </svg>
                 Открыть на GitHub
             </a>
-            
+
             <div class="repo-stats">
 
-                
+
                 <span class="repo-stat">
                     <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                         <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
@@ -448,6 +452,44 @@
                 </span>
             </div>
         </div>
+        
+        
+        <!-- карточка -->
+        <div class="repo-card">
+            <div class="repo-header">
+
+                <h2 class="repo-title">LehaProfile (for Entrepreneurs)</h2>
+            </div>
+
+            <p class="repo-description">
+                📌 Микросервис для предпринимателей | Хранение профилей + валидация данных
+            </p>
+
+            <a href="https://github.com/AABarabanov/LProfile4Entrs" class="repo-link" target="_blank">
+                <svg class="repo-link-icon" viewBox="0 0 24 24">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+                Открыть на GitHub
+            </a>
+
+            <div class="repo-stats">
+
+
+                <span class="repo-stat">
+                    <svg class="repo-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    Последнее обновление: 26.06.2025
+                </span>
+            </div>
+        </div>
+        
+        
     </div>
 
     <script>
@@ -473,7 +515,7 @@
         cyberMenu.addEventListener('click', (e) => {
             e.stopPropagation();
         });
-    
+
 
 
     </script>
