@@ -2,278 +2,355 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>AI — зеркало пользователя</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI — зеркало пользователя</title>
     <style>
+        /* Базовые стили */
         body {
-            background: #181826;
-            color: #fff;
-            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
-            padding: 0;
-        }
-        .blog-container {
-            margin-left: 320px;
-            padding: 30px;
-        }
-        .article-card {
-            background: rgba(15, 15, 26, 0.7);
-            border-left: 3px solid #6e44ff;
-            padding: 32px 24px;
-            margin-bottom: 25px;
-            transition: all 0.3s ease;
-            
-            box-sizing: border-box;
-            box-shadow: 0 0 15px rgba(110, 68, 255, 0.07);
-            max-width: 800px;
-        }
-        .article-card:hover {
-            background: rgba(30, 30, 45, 0.9);
-            box-shadow: 0 0 20px rgba(110, 68, 255, 0.3);
-        }
-        .article-title {
-            color: #00FF88;
-            font-size: 2.2em;
-            margin-bottom: 10px;
-        }
-        .article-date {
-            color: #b0b0c0;
-            font-size: 0.9em;
-            margin-bottom: 20px;
-        }
-        .article-excerpt {
-            font-size: 1.15em;
-            margin-bottom: 24px;
+            background: #1c2333;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            overflow-x: hidden;
             line-height: 1.6;
-        }
-        .article-content {
-            font-size: 1.08em;
-            line-height: 1.7;
-            margin-bottom: 18px;
-
-
-        }
-        .article-tags {
-            margin-top: 35px;
-            color: #6e44ff;
-            font-size: 0.95em;
-            opacity: 0.85;
+            padding-bottom: 40px;
         }
 
-.article-content img {
-    width: 100%;
-    display: block;
-    margin: 0 auto;
-}
-
- .cyber-menu { margin-top: -40px;
-            width: 300px;
+        /* Контейнер меню */
+        .cyber-menu {
+top: 0;            
+width: 280px;
             height: 100vh;
-            background: rgba(15, 15, 26, 0.8);
-            border-right: 1px solid #e0e0e0;
+            background: rgba(15, 15, 26, 0.98);
+            border-right: 1px solid #6e44ff;
             position: fixed;
-            backdrop-filter: blur(5px);
-            padding-top: 50px;
-            z-index: 10;
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            left: -280px;
+            transition: left 0.3s ease-in-out;
+            box-shadow: 0 0 30px rgba(110, 68, 255, 0.4);
+            display: flex;
+            flex-direction: column;
         }
 
-        /* КРУТЫЕ КНОПКИ */
+        .cyber-menu.active {
+            left: 0;
+        }
+
+        /* Основное содержимое меню с прокруткой */
+        .menu-scrollable {
+            flex: 1;
+            overflow-y: auto;
+            padding: 80px 0 20px;
+        }
+
+        /* Стилизация скроллбара */
+        .menu-scrollable::-webkit-scrollbar {
+            width: 5px;
+        }
+        .menu-scrollable::-webkit-scrollbar-track {
+            background: rgba(15, 15, 26, 0.5);
+        }
+        .menu-scrollable::-webkit-scrollbar-thumb {
+            background-color: #6e44ff;
+            border-radius: 3px;
+        }
+
+        /* Кнопка бургера */
+        .menu-toggle {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            width: 30px;
+            height: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            z-index: 101;
+            background: transparent;
+            padding: 5px;
+            transition: all 0.3s;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background: #e0e0e0;
+            transition: all 0.3s ease;
+            transform-origin: left center;
+        }
+
+        .menu-toggle:hover span {
+            background: #6e44ff;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(1px, -1px);
+            background: #6e44ff;
+            width: 110%;
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+            width: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(1px, 1px);
+            background: #6e44ff;
+            width: 110%;
+        }
+
+        
         .menu-item {
-            padding: 18px 30px;
-            margin: 10px 20px;
-            color: #b0b0c0;
+            padding: 12px 20px;
+            margin: 8px 10px;
+            color: #ffffff;
             text-decoration: none;
             display: flex;
             align-items: center;
-            border-left: 3px solid transparent;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            border-left: 2px solid #6e44ff;
+            transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
-            background: rgba(30, 30, 45, 0.3);
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .menu-item:hover {
-            color: #ffffff;
             background: rgba(110, 68, 255, 0.2);
-            border-left: 3px solid #6e44ff;
-            transform: translateX(10px);
-            box-shadow: 5px 0 15px rgba(110, 68, 255, 0.5);
+            border-radius: 0 6px 6px 0;
+            font-size: 14px;
+            box-shadow: 0 0 10px rgba(110, 68, 255, 0.3);
         }
 
+        /* Активная кнопка (текущая страница) */
         .menu-item.active {
-            color: #ffffff;
-            font-weight: bold;
+            background: rgba(110, 68, 255, 0.4);
+            border-left: 2px solid #e0e0e0;
         }
-        
-        /* Анимация "голограммы" */
-        .menu-item:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(110, 68, 255, 0.4), 
-                transparent);
-            transition: 0.6s;
-        }
-        
-        .menu-item:hover:before {
-            left: 140%;
-        }
-
         .menu-item.active:after {
             content: '>';
             position: absolute;
-            right: 20px;
+            right: 15px;
             animation: blink 1s infinite;
-        }
-        
-
-
-
-
-        .minimal-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-	    margin-bottom: 40px;
-            color: #e0e0e0;
-            font-family: 'Courier New', monospace;
-            text-decoration: none;
-            padding: 6px 12px;
-            transition: all 0.25s;
-            }
-            .minimal-link:hover {
             color: #6e44ff;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .menu-item:hover {
+            background: rgba(110, 68, 255, 0.3);
+            transform: translateX(5px);
+            box-shadow: 0 0 15px rgba(110, 68, 255, 0.5);
+        }
+
+        .desktop-version-btn {
+            background: transparent !important;
+            border-left: none !important;
+            box-shadow: none !important;
+            opacity: 0.6;
+            margin: 20px 10px 5px;
+            font-size: 13px;
+            display: block;
+            color: #b0b0c0;
+        }
+
+        .desktop-version-btn:hover {
+            margin-top: 20px;
+            opacity: 0.9;
+            background: transparent !important;
+            border-left: none !important;
+            box-shadow: none !important;
+        }
+
+        .menu-footer {
+            margin-top: 30px;
+            padding: 0 20px 20px;
+            font-size: 12px;
+            text-align: center;
+            color: rgba(176, 176, 192, 0.7);
+        }
+
+
+
+        /* Стили для статьи */
+        .article-container {
+            max-width: 90%;
+            margin: 70px auto 40px;
+            padding: 0 15px;
+        }
+
+        .article-title {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: #b892ff;
+            line-height: 1.3;
+        }
+
+        .article-date {
+            color: #8a8aa8;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .article-excerpt {
+            font-style: italic;
+            color: #a0a0c0;
+            margin-bottom: 30px;
+            padding: 15px;
+            border-left: 2px solid #6e44ff;
+            background: rgba(30, 35, 45, 0.4);
+        }
+
+        .article-content {
+            margin-bottom: 30px;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+        }
+
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 25px auto;
+            border-radius: 4px;
+            border: 1px solid #2a3446;
+        }
+
+        .article-content em {
+            color: #b892ff;
+        }
+
+        .article-content strong {
+            color: #ffffff;
+        }
+
+        .article-tags {
+            color: #8a8aa8;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #2a3446;
+        }
+
+        /* Кнопка "Наверх" */
+        #scrollTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: rgba(110, 68, 255, 0.7);
+            color: white;
+            cursor: pointer;
+            padding: 12px 15px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+        }
+
+        #scrollTopBtn:hover {
+            background-color: #6e44ff;
+        }
+
+        @media (max-width: 480px) {
+            .cyber-menu {
+                width: 240px;
+                left: -240px;
             }
-            .minimal-link:hover svg {
-            transform: translateX(2px);
-            stroke: #6e44ff;
+            .corner-banner {
+                width: 80px;
             }
-
-
- .desktop-version-btn {
-    
-    background: transparent !important;
-    border-left: none !important;
-    box-shadow: none !important;
-    data-text: none !important;
-    
-    opacity: 0.6;
-    margin: 20px 10px 5px;
-    font-size: 13px;
-    display: block;
-    color: #b0b0c0;
-    
-    
-}
-#scrollTopBtn {
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    z-index: 999;
-    background: #6e44ff;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    font-size: 2em;
-    cursor: pointer;
-    box-shadow: 0 4px 18px rgba(110,68,255,0.16);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s, background 0.2s;
-}
-#scrollTopBtn:hover {
-    background: #00FF88;
-    color: #181826;
-}
-#scrollTopBtn.show {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-
-        @media (max-width: 900px) {
-            .blog-container {
-                margin-left: 0;
-                padding: 15px;
+            .menu-scrollable {
+                padding-top: 60px;
             }
-            .article-card {
-                padding: 20px 10px;
+            .article-title {
+                font-size: 1.5rem;
             }
         }
-@media (max-width: 900px) {
-    .cyber-menu {
-        position: static;
-        width: 100%;
-        height: auto;
-        border-right: none;
-        margin-top: 0;
-        padding-top: 10px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-    }
-    .blog-container {
-        margin-left: 0;
-        padding: 15px;
-    }
-}
+
+        /* Альбомный режим */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .menu-scrollable {
+                padding-top: 40px;
+            }
+            .menu-toggle {
+                top: 10px;
+                left: 10px;
+            }
+            .corner-banner {
+                top: 10px;
+                right: 10px;
+                width: 80px;
+            }
+        }
+
+        /* Для очень маленьких экранов */
+        @media (max-width: 360px) {
+            .article-title {
+                font-size: 1.3rem;
+            }
+            .article-container {
+                margin-top: 60px;
+            }
+        }
     </style>
 </head>
 <body>
-    
+    <!-- Кнопка меню -->
+    <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
-
-<!-- Вертикальное меню -->
-    
-       <nav class="cyber-menu">
-
-<a href="https://aabarabanov.github.io/index.html" class="minimal-link">
-	<svg width="18" height="18" viewBox="0 0 24 24" fill="none"  	stroke="#e0e0e0" stroke-width="2" stroke-linecap="round">
-    	<path d="M3 12L21 12M21 12L12 3M21 12L12 21"/>
-        </svg>
-        <span>INDEX.html</span>
-    </a>
-
-        <!-- КРУТЫЕ КНОПКИ -->
-	    
-        <!-- Для активной кнопки <a href="#" class="menu-item active"> -->
-        <a href="https://aabarabanov.github.io/projects.html" class="menu-item">    
-	    <span class="menu-icon">🚀</span> &nbsp;Projects
-        </a>
-	    
-        <a href="https://aabarabanov.github.io/blog.html" class="menu-item">
-            <span class="menu-icon">📝</span> &nbsp;Blog
-		
-        <a href="https://aabarabanov.github.io/contacts.html" class="menu-item">
-            <span class="menu-icon">📧</span> &nbsp;>_Contact
-        </a>
-
-
-
- <a href="https://aabarabanov.github.io/m/index.html" class="menu-item desktop-version-btn">
-                <span class="menu-icon">📱</span> &nbsp;Mobile version
+    <!-- Вертикальное меню -->
+    <nav class="cyber-menu">
+        <div class="menu-scrollable">
+            <a href="https://aabarabanov.github.io/m/index.html" class="menu-item">
+                <span class="menu-icon">⌂</span> &nbsp;INDEX.html
             </a>
 
+            <a href="https://aabarabanov.github.io/m/projects.html" class="menu-item">    
+                <span class="menu-icon">🚀</span> &nbsp;Projects
+            </a>
+
+            <a href="https://aabarabanov.github.io/m/blog.html" class="menu-item">
+                <span class="menu-icon">📝</span> &nbsp;Blog
+            </a>
+
+            <a href="https://aabarabanov.github.io/m/contacts.html" class="menu-item">
+                <span class="menu-icon">📧</span> &nbsp;>_Contact
+            </a>
+
+            <!-- Кнопка Desktop version -->
+            <a href="https://aabarabanov.github.io" class="menu-item desktop-version-btn">
+                <span class="menu-icon">🖥️</span> &nbsp;Desktop version
+            </a>
+
+            <!-- Футер меню -->
+            <div class="menu-footer">
+                © 2025 | Feel free to copy anything*
+            </div>
+        </div>
     </nav>
-    <div class="blog-container">
+
+
+    <!-- Контейнер для статьи -->
+    <div class="article-container">
         <div class="article-card">
             <div class="article-title">AI — зеркало пользователя</div>
             <div class="article-date">26 мая 2025</div>
-            <div class="article-excerpt">
-                Когда-то ИИ был просто инструментом — безликим и предсказуемым. Сегодня он стал чем-то большим: цифровым отражением нас самих.
-            </div>
-            <div class="article-content">
-                <p>Представьте, что ваше утро начинается с чата, где нейросеть уже научилась шутить как вы, строить фразы как вы, даже ошибаться... как вы. Здорово? Не всегда.</p>
 
-<img src="https://aabarabanov.github.io/assets/images/ai-mirror.jpeg" class="article-content img" alt="AI — зеркало пользователя" width="600" style="display:block; margin: 24px auto;">
+            <div class="article-content">
+                <p> Когда-то ИИ был просто инструментом — безликим и предсказуемым. Сегодня он стал чем-то большим: цифровым отражением нас самих. Представьте, что ваше утро начинается с чата, где нейросеть уже научилась шутить как вы, строить фразы как вы, даже ошибаться... как вы. Здорово? Не всегда.</p>
+
+                <img src="https://aabarabanov.github.io/assets/images/ai-mirror.jpeg" class="article-content img" alt="AI — зеркало пользователя" style="display:block; margin: 24px auto;">
 
                 <p><em>Все совпадения с реальными ИИ-сервисами случайны.</em></p>
                 <p>Помните, как в детстве играли с эхом в горах? Стоило крикнуть глупость — и она возвращалась к вам, многократно усиленная. Современные ИИ работают похожим образом. ChatGPT, который подстраивается под ваш стиль общения — не просто удобный функционал. Это начало сложных отношений, где технология становится нашим цифровым альтер эго.</p>
@@ -291,36 +368,51 @@
         </div>
     </div>
 
-<button id="scrollTopBtn" title="Наверх">↑</button>
+    <button id="scrollTopBtn" title="Наверх">↑</button>
 
-<!--
-<div id="footer-container"></div>
+    <script>
+        // Управление меню
+        const menuToggle = document.querySelector('.menu-toggle');
+        const cyberMenu = document.querySelector('.cyber-menu');
 
-<script>
-  // Подгружаем футер
-  fetch('https://aabarabanov.github.io/footer.html')
-    .then(response => response.text())
-    .then(html => {
-      document.getElementById('footer-container').innerHTML = html;
-    })
-    .catch(error => console.error('Не загрузился футер:', error));
-</script>
--->
-<script>
-const btn = document.getElementById('scrollTopBtn');
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        btn.classList.add('show');
-    } else {
-        btn.classList.remove('show');
-    }
-});
-btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-</script>
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menuToggle.classList.toggle('active');
+            cyberMenu.classList.toggle('active');
+            document.body.style.overflow = cyberMenu.classList.contains('active') ? 'hidden' : '';
+        });
 
+        // Закрытие при клике вне меню
+        document.addEventListener('click', () => {
+            if (cyberMenu.classList.contains('active')) {
+                menuToggle.classList.remove('active');
+                cyberMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
 
+        // Предотвращение закрытия при клике на само меню
+        cyberMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Кнопка "Наверх"
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollTopBtn.style.display = 'block';
+            } else {
+                scrollTopBtn.style.display = 'none';
+            }
+        };
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>
-
