@@ -1,0 +1,352 @@
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>index</title>
+        <style>
+            body {
+                margin: 0;
+                background: #1E1F22;
+                color: #e0e0e0;
+                font-family: monospace;
+                overflow-x: hidden;
+            }
+            
+            /* Контейнер меню */
+            .cyber-menu {
+                width: 280px;
+                height: 100vh;
+                background: rgba(15, 15, 26, 0.98);
+                border-right: 1px solid #6e44ff;
+                position: fixed;
+                backdrop-filter: blur(8px);
+                z-index: 100;
+                left: -280px;
+                transition: left 0.3s ease-in-out;
+                box-shadow: 0 0 30px rgba(110, 68, 255, 0.4);
+                display: flex;
+                flex-direction: column;
+            }
+
+            .cyber-menu.active {
+                left: 0;
+            }
+
+            /* Основное содержимое меню с прокруткой */
+            .menu-scrollable {
+                flex: 1;
+                overflow-y: auto;
+                padding: 80px 0 20px;
+            }
+
+            /* Стилизация скроллбара */
+            .menu-scrollable::-webkit-scrollbar {
+                width: 5px;
+            }
+            .menu-scrollable::-webkit-scrollbar-track {
+                background: rgba(15, 15, 26, 0.5);
+            }
+            .menu-scrollable::-webkit-scrollbar-thumb {
+                background-color: #6e44ff;
+                border-radius: 3px;
+            }
+
+            /* Обертка для бургера и подсказки */
+            .menu-toggle-wrapper {
+                position: fixed;
+                top: 15px;
+                left: 15px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                z-index: 101;
+                transition: all 0.3s ease;
+            }
+
+            /* Кнопка бургера */
+            .menu-toggle {
+                width: 30px;
+                height: 22px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                cursor: pointer;
+                background: transparent;
+                padding: 5px;
+                transition: all 0.3s;
+            }
+
+            .menu-toggle span {
+                display: block;
+                height: 2px;
+                width: 100%;
+                background: #e0e0e0;
+                transition: all 0.3s ease;
+                transform-origin: left center;
+            }
+
+            .menu-toggle:hover span {
+                background: #6e44ff;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(1px, -1px);
+                background: #6e44ff;
+                width: 110%;
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+                width: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(1px, 1px);
+                background: #6e44ff;
+                width: 110%;
+            }
+
+            /* Подсказка с анимацией */
+            .menu-tooltip {
+                position: relative;
+                color: #e0e0e0;
+                font-size: 14px;
+                padding-left: 15px;
+                opacity: 1;
+                transition: opacity 0.3s ease, transform 0.3s ease;
+                animation: pulse 2s infinite;
+            }
+
+            /* Анимация пульсации */
+            @keyframes pulse {
+                0%, 100% { opacity: 0.8; }
+                50% { opacity: 1; }
+            }
+
+            /* Скрытие подсказки при активном меню */
+            .menu-toggle.active ~ .menu-tooltip {
+                opacity: 0 !important;
+                transform: translateX(-10px);
+                pointer-events: none;
+                animation: none;
+            }
+
+            .menu-item {
+                padding: 12px 20px;
+                margin: 8px 10px;
+                color: #ffffff;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                border-left: 2px solid #6e44ff;
+                transition: all 0.3s ease;
+                position: relative;
+                background: rgba(110, 68, 255, 0.2);
+                border-radius: 0 6px 6px 0;
+                font-size: 14px;
+                box-shadow: 0 0 10px rgba(110, 68, 255, 0.3);
+            }
+
+            /* Активная кнопка (текущая страница) */
+            .menu-item.active {
+                background: rgba(110, 68, 255, 0.4);
+                border-left: 2px solid #e0e0e0;
+            }
+            .menu-item.active:after {
+                    content: '>';
+                position: absolute;
+                right: 15px;
+                animation: blink 1s infinite;
+                color: #6e44ff;
+            }
+
+            @keyframes blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0; }
+            }
+
+            .menu-item:hover {
+                background: rgba(110, 68, 255, 0.3);
+                transform: translateX(5px);
+                box-shadow: 0 0 15px rgba(110, 68, 255, 0.5);
+            }
+            
+            /* go 2 mobile button*/
+            .desktop-version-btn {
+                background: transparent !important;
+                border-left: none !important;
+                box-shadow: none !important;
+                opacity: 0.6;
+                margin: 20px 24px 5px;
+                font-size: 13px;
+                display: inline-block; /* Изменено на inline-block */
+                color: #b0b0c0;
+                text-decoration: none;
+                padding: 8px 12px;
+                transition: all 0.3s ease;
+                max-width: 200px; /* Ограничиваем максимальную ширину */
+            }
+
+            .desktop-version-btn:hover {
+                margin-top: 20px;
+
+                opacity: 0.9;
+        
+
+            }
+
+
+            }
+
+            /* Стили для контейнера иконки */
+            .menu-icon {
+                display: inline-block;
+                width: 100%; /* Занимает всю ширину кнопки */
+                text-align: center;
+            }
+
+            /* Стили для адаптивной картинки */
+            .menu-icon img {
+                max-width: 100%; /* Не больше ширины кнопки */
+                height: auto; /* Сохраняет пропорции */
+                display: block; /* Убирает лишние отступы */
+                margin: 0 auto; /* Центрирование */
+                border: 1px solid rgba(176, 176, 192, 0.2);
+                border-radius: 4px;
+            }
+
+
+            /* Меню-Футер */
+
+            .menu-footer {
+                margin-top: 30px;
+                padding: 0 20px 20px;
+                font-size: 12px;
+                text-align: center;
+                color: rgba(176, 176, 192, 0.7);
+            }
+
+            .corner-banner {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                width: 150px;
+                z-index: 100;
+                filter: drop-shadow(0 0 10px rgba(110, 68, 255, 0.7));
+            }
+
+            @media (max-width: 480px) {
+                .cyber-menu {
+                    width: 240px;
+                    left: -240px;
+                }
+                .corner-banner {
+                    width: 80px;
+                }
+                .menu-scrollable {
+                    padding-top: 60px;
+                }
+                .menu-tooltip {
+                    font-size: 12px;
+                }
+            }
+
+            /* Альбомный режим */
+            @media (max-width: 768px) and (orientation: landscape) {
+                .menu-scrollable {
+                    padding-top: 40px;
+                }
+                .menu-toggle-wrapper {
+                    top: 10px;
+                    left: 10px;
+                }
+                .corner-banner {
+                    top: 10px;
+                    right: 10px;
+                    width: 80px;
+                }
+            }
+        </style>
+    </head>
+    
+      <body>
+        <!-- Обертка для бургера и подсказки -->
+        <div class="menu-toggle-wrapper">
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-tooltip"> <-- Tap to open menu</div>
+        </div>
+
+        <!-- Вертикальное меню -->
+        <nav class="cyber-menu">
+            <div class="menu-scrollable">
+                <a href="index.html" class="menu-item active">
+                    <span class="menu-icon">⌂</span> &nbsp;INDEX.html
+                </a>
+
+                <a href="projects.html" class="menu-item">    
+                    <span class="menu-icon">🚀</span> &nbsp;Projects
+                </a>
+
+                <a href="blog.html" class="menu-item">
+                    <span class="menu-icon">📝</span> &nbsp;Blog
+                </a>
+
+                <a href="contacts.html" class="menu-item">
+                    <span class="menu-icon">📧</span> &nbsp;>_Contact
+                </a>
+
+
+                <!-- Кнопка Desktop version -->
+    <a href="https://aabarabanov.github.io" class="desktop-version-btn">
+            <span class="menu-icon">
+                <img src="qr2m.png" alt="QR-код для Desktop version">
+            </span>
+        </a>
+
+
+
+                <!-- Футер меню -->
+                <div class="menu-footer">
+                    © 2025 | Feel free to copy anything*
+                </div>
+            </div>
+        </nav>
+
+        <img src="https://aabarabanov.github.io/assets/images/leha_mnemo_teaser.PNG" alt="(ﾉﾟ0ﾟ)ﾉ~" width="100%" style="margin-top: 40px;">
+
+        <script>
+            // Управление меню
+            const menuToggle = document.querySelector('.menu-toggle');
+            const cyberMenu = document.querySelector('.cyber-menu');
+            const menuTooltip = document.querySelector('.menu-tooltip');
+
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                menuToggle.classList.toggle('active');
+                cyberMenu.classList.toggle('active');
+                document.body.style.overflow = cyberMenu.classList.contains('active') ? 'hidden' : '';
+                
+                // Автоматически скроется через CSS благодаря .menu-toggle.active ~ .menu-tooltip
+            });
+
+            // Закрытие при клике вне меню
+            document.addEventListener('click', () => {
+                if (cyberMenu.classList.contains('active')) {
+                    menuToggle.classList.remove('active');
+                    cyberMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Предотвращение закрытия при клике на само меню
+            cyberMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        </script>
+    </body>
+    </html>
