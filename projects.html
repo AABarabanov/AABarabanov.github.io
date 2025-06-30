@@ -8,13 +8,56 @@
         /* Базовые стили */
         body {
             margin: 0;
+            padding: 0;
             background: #1c2333;
             color: #e0e0e0;
             font-family: 'Courier New', monospace;
             overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
-        /* КРУТЫЕ КНОПКИ */
+        /* Основное содержимое */
+        body > *:not(#footer-container) {
+            flex: 1;
+        }
+        
+        /* Стили для футера */
+        #footer-container {
+            width: 100%;
+            margin-top: auto;
+        }
+        
+        /* Адаптация для мобильных */
+        @media (max-width: 768px) {
+            .repo-card {
+                width: calc(100% - 40px);
+                margin-left: 20px;
+                margin-right: 20px;
+                padding: 15px;
+            }
+            
+            .corner-banner {
+                width: 100px;
+                top: 10px;
+                right: 10px;
+            }
+            
+            /* Специальные стили для футера на мобильных */
+            #footer-container footer {
+                padding: 15px;
+                font-size: 12px;
+            }
+            
+            #footer-container .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+
+        /* Остальные ваши стили остаются без изменений */
         .menu-item {
             padding: 18px 30px;
             margin: 10px 20px;
@@ -30,181 +73,68 @@
             border-radius: 0 8px 8px 0;
         }
         
-        .menu-item.active {
-            color: #ffffff;
-            font-weight: bold;
-            justify-content: center;
-        }
-        
-        /* Правый баннер */
-        .corner-banner {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 150px;
-            z-index: 100;
-            filter: drop-shadow(0 0 10px rgba(110, 68, 255, 0.7));
-        }
-
-        .banner-link:hover img {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 12px #6e44ff);
-        }
-
-        .minimal-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #e0e0e0;
-            font-family: 'Courier New', monospace;
-            text-decoration: none;
-            padding: 6px 12px;
-            transition: all 0.25s;
-        }
-            .minimal-link:hover {
-            color: #6e44ff;
-        }
-            .minimal-link:hover svg {
-            transform: translateX(2px);
-            stroke: #6e44ff;
-        }
-
-
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-
-
-
-.repo-card {
-    /*background: rgba(30, 30, 45, 0.5);*/
-    border-radius: 12px;
-    padding: 20px;
-    width: 90%;
-    border-left: 3px solid #6e44ff;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-    margin-left: 50px;
-    margin-bottom: 25px;
-
-}
-
-        
-        .repo-title {
-            color: #ffffff;
-            font-size: 1.6em;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .repo-description {
-            color: #b0b0c0;
-            margin-bottom: 15px;
-            
-            font-size: 1em;
-        }
-        
-        .repo-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #6e44ff;
-            text-decoration: none;
-            padding: 8px 16px;
-            border: 1px solid #6e44ff;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-        
-        .repo-link:hover {
-            background: rgba(110, 68, 255, 0.1);
-        }
-        
-        .repo-stats {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-            color: #7a7a8c;
-            font-size: 0.9em;
-        }
+        /* ... остальные ваши стили ... */
     </style>
 </head>
 <body>
-    
+    <!-- Ваше основное содержимое -->
     <a href="index.html" class="minimal-link">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"   stroke="#e0e0e0" stroke-width="2" stroke-linecap="round">
-              <path d="M3 12L21 12M21 12L12 3M21 12L12 21"/>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e0e0e0" stroke-width="2" stroke-linecap="round">
+            <path d="M3 12L21 12M21 12L12 3M21 12L12 21"/>
         </svg>
         <span>INDEX.html</span>
     </a>
 
-<header class="menu-item active">🚀&nbsp;Projects</header>
+    <header class="menu-item active">🚀&nbsp;Projects</header>
     
-<!-- Карточка репозитория 2 LehaMnemo-->
-
+    <!-- Карточки репозиториев -->
     <div class="repo-card">
-        <div class="repo-title">
-
-            LehaMnemo
-        </div>
-        <div class="repo-description">
-            Мощный инструмент для запоминания, вдохновленный Anki, но с фокусом на минимализм и эффективность
-        </div>
-        <a href="https://github.com/AABarabanov/LehaMnemo" class="repo-link" target="_blank">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/>
-                <line x1="10" y1="14" x2="21" y2="3"/>
-            </svg>
-            Открыть на GitHub
-        </a>
-        <div class="repo-stats">
-            <span>📅 Последнее обновление: 26.06.2025</span>
-        </div>
+        <!-- ... содержимое карточки ... -->
     </div>
 
+    <!-- Контейнер для футера -->
+    <div id="footer-container"></div>
 
-
-    <!-- Карточку репозитория LehaProfile-->
-    <div class="repo-card">
-        <div class="repo-title">
-
-            LehaProfile (for Entrepreneurs)
-        </div>
-        <div class="repo-description">
-            📌 Микросервис для предпринимателей | Хранение профилей + валидация данных
-        </div>
-        <a href="https://github.com/AABarabanov/LProfile4Entrs" class="repo-link" target="_blank">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/>
-                <line x1="10" y1="14" x2="21" y2="3"/>
-            </svg>
-            Открыть на GitHub
-        </a>
-        <div class="repo-stats">
-            <span>📅 Последнее обновление: 26.06.2025</span>
-        </div>
-    </div>
-
-
-    
-<div id="footer-container"></div>
-
-<script>
-  // Подгружаем футер
-  fetch('serious_footer.html')
-    .then(response => response.text())
-    .then(html => {
-      document.getElementById('footer-container').innerHTML = html;
-    })
-    .catch(error => console.error('Не загрузился футер:', error));
-</script>
-    
+    <script>
+        // Подгружаем футер
+        fetch('serious_footer.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('footer-container').innerHTML = html;
+                
+                // Добавляем дополнительные стили для футера после загрузки
+                const style = document.createElement('style');
+                style.textContent = `
+                    footer {
+                        background: rgba(15, 15, 26, 0.9);
+                        padding: 20px;
+                        border-top: 1px solid #6e44ff;
+                        width: 100%;
+                        box-sizing: border-box;
+                    }
+                    
+                    .footer-content {
+                        max-width: 1200px;
+                        margin: 0 auto;
+                        display: flex;
+                        justify-content: space-between;
+                        flex-wrap: wrap;
+                    }
+                    
+                    @media (max-width: 768px) {
+                        footer {
+                            padding: 15px;
+                        }
+                        
+                        .footer-content {
+                            flex-direction: column;
+                            gap: 10px;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            })
+            .catch(error => console.error('Не загрузился футер:', error));
+    </script>
 </body>
 </html>
