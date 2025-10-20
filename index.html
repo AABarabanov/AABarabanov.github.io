@@ -185,7 +185,7 @@
                 background: transparent !important;
                 border-left: none !important;
                 box-shadow: none !important;
-                opacity: 0.6;
+                opacity: 0.8;
                 margin: 20px 24px 5px;
                 font-size: 13px;
                 display: inline-block; /* Изменено на inline-block */
@@ -194,13 +194,18 @@
                 padding: 8px 12px;
                 transition: all 0.3s ease;
                 max-width: 200px; /* Ограничиваем максимальную ширину */
+
+                text-align: center;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
             }
 
-            .desktop-version-btn:hover {
-                margin-top: 20px;
 
-                opacity: 0.9;
-            }
+
+
+
+
         }
 
             /* Стили для контейнера иконки */
@@ -404,11 +409,7 @@
             flex-shrink: 0;
         }
 
-        .tech-item:hover {
-            background: rgba(110, 68, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(110, 68, 255, 0.4);
-        }
+
 
         .cta-buttons {
             display: flex;
@@ -576,11 +577,11 @@
             </a>
 
             <!-- Кнопка Desktop version -->
-            <a href="https://aabarabanov.github.io" class="desktop-version-btn">
+            <div class="desktop-version-btn">
                 <span class="menu-icon">
                     <img src="assets/images/qr2m.png" alt="QR-код">
                 </span>
-            </a>
+            </div>
 
             <!-- Футер меню -->
             <div class="menu-footer">
