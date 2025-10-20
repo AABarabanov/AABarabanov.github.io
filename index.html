@@ -1,19 +1,27 @@
-    <!DOCTYPE html>
-    <html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>index</title>
-        <style>
-            body {
-                margin: 0;
-                background: #1E1F22;
-                color: #e0e0e0;
-                font-family: monospace;
-                overflow-x: hidden;
-            }
-            
-            /* Контейнер меню */
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <style>
+        /* FIX: Убираем глобальные отступы */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
+        body {
+            background: #1E1F22;
+            color: #e0e0e0;
+            font-family: monospace;
+            position: relative;
+        }
+
+        /* Контейнер меню */
             .cyber-menu {
                 width: 280px;
                 height: 100vh;
@@ -192,17 +200,13 @@
                 margin-top: 20px;
 
                 opacity: 0.9;
-        
-
             }
-
-
-            }
+        }
 
             /* Стили для контейнера иконки */
             .menu-icon {
                 display: inline-block;
-                width: 100%; /* Занимает всю ширину кнопки */
+                width: 100%; 
                 text-align: center;
             }
 
@@ -268,86 +272,393 @@
                     width: 80px;
                 }
             }
-        </style>
-    </head>
-    
-      <body>
-        <!-- Обертка для бургера и подсказки -->
-        <div class="menu-toggle-wrapper">
-            <div class="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <div class="menu-tooltip"> <-- Tap to open menu</div>
+
+        /* НОВЫЕ СТИЛИ ДЛЯ ГЛАВНОГО ЭКРАНА */
+        /* FIX: Убираем лишние отступы и ограничиваем размеры */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .cyber-glitch {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 
+                0.05em 0 0 rgba(255, 0, 0, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            animation: glitch 2s infinite;
+            margin-bottom: 20px;
+            margin-top: 0;
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 
+                    0.05em 0 0 rgba(255, 0, 0, 0.75),
+                    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            14% {
+                text-shadow: 
+                    0.05em 0 0 rgba(255, 0, 0, 0.75),
+                    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            15% {
+                text-shadow: 
+                    -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                    0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                    -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            49% {
+                text-shadow: 
+                    -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                    0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                    -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            50% {
+                text-shadow: 
+                    0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                    0.05em 0 0 rgba(0, 255, 0, 0.75),
+                    0 -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            99% {
+                text-shadow: 
+                    0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                    0.05em 0 0 rgba(0, 255, 0, 0.75),
+                    0 -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            100% {
+                text-shadow: 
+                    0.05em 0 0 rgba(255, 0, 0, 0.75),
+                    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #6e44ff;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 0;
+        }
+
+        .typing-text {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #b0b0c0;
+            margin-bottom: 40px;
+            min-height: 60px;
+            border-right: 2px solid #6e44ff;
+            animation: blink-cursor 0.7s infinite;
+            display: inline-block;
+            padding-right: 5px;
+        }
+
+        @keyframes blink-cursor {
+            0%, 100% { border-color: #6e44ff; }
+            50% { border-color: transparent; }
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .tech-item {
+            background: rgba(110, 68, 255, 0.1);
+            border: 1px solid #6e44ff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #b0b0c0;
+            transition: all 0.3s ease;
+            cursor: default;
+            flex-shrink: 0;
+        }
+
+        .tech-item:hover {
+            background: rgba(110, 68, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(110, 68, 255, 0.4);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        .cta-btn {
+            padding: 12px 30px;
+            border: 2px solid #6e44ff;
+            background: transparent;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            flex-shrink: 0;
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(110, 68, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-btn:hover::before {
+            left: 100%;
+        }
+
+        .cta-btn:hover {
+            background: rgba(110, 68, 255, 0.1);
+            box-shadow: 0 0 20px rgba(110, 68, 255, 0.5);
+        }
+
+        .cta-btn.primary {
+            background: rgba(110, 68, 255, 0.2);
+        }
+
+        .matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            opacity: 0.1;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #6e44ff;
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .status-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: #00ff00;
+            z-index: 99;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7);
+            }
+            50% {
+                transform: scale(1.2);
+                box-shadow: 0 0 0 5px rgba(0, 255, 0, 0);
+            }
+        }
+
+        /* FIX: Дополнительные исправления для прокрутки */
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Обертка для бургера и подсказки -->
+    <div class="menu-toggle-wrapper">
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
+        <div class="menu-tooltip"> <-- Tap to open menu</div>
+    </div>
 
-        <!-- Вертикальное меню -->
-        <nav class="cyber-menu">
-            <div class="menu-scrollable">
-                <a href="index.html" class="menu-item active">
-                    <span class="menu-icon">⌂</span> &nbsp;INDEX.html
-                </a>
+    <!-- Вертикальное меню -->
+    <nav class="cyber-menu">
+        <div class="menu-scrollable">
+            <a href="index.html" class="menu-item active">
+                <span class="menu-icon">⌂</span> &nbsp;INDEX.html
+            </a>
 
-                <a href="projects.html" class="menu-item">    
-                    <span class="menu-icon">🚀</span> &nbsp;Projects
-                </a>
+            <a href="projects.html" class="menu-item">    
+                <span class="menu-icon">🚀</span> &nbsp;Projects
+            </a>
 
-                <a href="blog.html" class="menu-item">
-                    <span class="menu-icon">📝</span> &nbsp;Blog
-                </a>
+            <a href="blog.html" class="menu-item">
+                <span class="menu-icon">📝</span> &nbsp;Blog
+            </a>
 
-                <a href="contacts.html" class="menu-item">
-                    <span class="menu-icon">📧</span> &nbsp;>_Contact
-                </a>
+            <a href="contacts.html" class="menu-item">
+                <span class="menu-icon">📧</span> &nbsp;>_Contact
+            </a>
 
+            <!-- Кнопка Desktop version -->
+            <a href="https://aabarabanov.github.io" class="desktop-version-btn">
+                <span class="menu-icon">
+                    <img src="assets/images/qr2m.png" alt="QR-код">
+                </span>
+            </a>
 
-                <!-- Кнопка Desktop version -->
-    <a href="https://aabarabanov.github.io" class="desktop-version-btn">
-            <span class="menu-icon">
-                <img src="assets/images/qr2m.png" alt="QR-код">
-            </span>
-        </a>
-
-
-
-                <!-- Футер меню -->
-                <div class="menu-footer">
-                    © 2025 | Feel free to copy anything*
-                </div>
+            <!-- Футер меню -->
+            <div class="menu-footer">
+                © 2025 | Feel free to copy anything*
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <img src="https://aabarabanov.github.io/assets/images/leha_mnemo_teaser.PNG" alt="(ﾉﾟ0ﾟ)ﾉ~" width="100%" style="margin-top: 40px;">
+    <!-- Главный экран -->
+    <section class="hero-section">
+        <div class="matrix-bg" id="matrixCanvas"></div>
+        <div class="floating-elements" id="floatingElements"></div>
+        
+        <div class="hero-content">
+            <h1 class="cyber-glitch">ALEX BARABANOV</h1>
+            <div class="subtitle">BACKEND_DEV</div>
+            
+            <div class="tech-stack">
+                <div class="tech-item" style="font-weight: bold;">Java</div>
+            </div>
+            <div class="tech-stack">
+                <div class="tech-item" style="font-weight: bold;">Python</div>
+                <div class="tech-item" style="font-size: 0.9em;">Django</div>
+                <div class="tech-item" style="font-size: 0.9em;">Flask</div>
+            </div>
+            <div class="tech-stack">
+                <div class="tech-item" style="font-size: 0.9em;">Git</div>
+                <div class="tech-item" style="font-size: 0.9em;">REST API</div>
+                <div class="tech-item" style="font-size: 0.9em;">JSON</div>
+                <div class="tech-item" style="font-size: 0.9em;">SQL</div>
+                <div class="tech-item" style="font-size: 0.9em;">Linux</div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="projects.html" class="cta-btn primary">View Projects</a>
+                <a href="contacts.html" class="cta-btn">Get In Touch</a>
+            </div>
+        </div>
+    </section>
 
-        <script>
-            // Управление меню
-            const menuToggle = document.querySelector('.menu-toggle');
-            const cyberMenu = document.querySelector('.cyber-menu');
-            const menuTooltip = document.querySelector('.menu-tooltip');
+    <!-- Индикатор статуса -->
+    <div class="status-indicator">
+        <div class="pulse-dot"></div>
+        <span>AVAILABLE FOR FREELANCE</span>
+    </div>
 
-            menuToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-                menuToggle.classList.toggle('active');
-                cyberMenu.classList.toggle('active');
-                document.body.style.overflow = cyberMenu.classList.contains('active') ? 'hidden' : '';
-                
-                // Автоматически скроется через CSS благодаря .menu-toggle.active ~ .menu-tooltip
-            });
+    <script>
+        // Управление меню
+        const menuToggle = document.querySelector('.menu-toggle');
+        const cyberMenu = document.querySelector('.cyber-menu');
+        const menuTooltip = document.querySelector('.menu-tooltip');
 
-            // Закрытие при клике вне меню
-            document.addEventListener('click', () => {
-                if (cyberMenu.classList.contains('active')) {
-                    menuToggle.classList.remove('active');
-                    cyberMenu.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menuToggle.classList.toggle('active');
+            cyberMenu.classList.toggle('active');
+            document.body.style.overflow = cyberMenu.classList.contains('active') ? 'hidden' : '';
+        });
 
-            // Предотвращение закрытия при клике на само меню
-            cyberMenu.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-        </script>
-    </body>
-    </html>
+        // Закрытие при клике вне меню
+        document.addEventListener('click', () => {
+            if (cyberMenu.classList.contains('active')) {
+                menuToggle.classList.remove('active');
+                cyberMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Предотвращение закрытия при клике на само меню
+        cyberMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // FIX вертикальной прокрутки
+        window.addEventListener('load', function() {
+            document.documentElement.style.overflowY = 'hidden';
+            document.body.style.overflowY = 'hidden';
+        });
+    </script>
+</body>
+</html>
