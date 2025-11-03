@@ -189,6 +189,32 @@
         <header class="menu-item active">🚀&nbsp;Projects</header>
         
         <div class="repo-card">
+            <div class="repo-title">Cyberimplant Base | Spring Boot Microservices</div>
+            <div class="repo-description">
+                Backend платформа для каталога киберимплантов из вселенной Cyberpunk 2020/2077. Полноценная CRUD система, состоящая из 2х микросервисов: API Gateway и Core Service.
+            </div>
+            <a href="https://github.com/AAB-corp/cyberimpl-base-api" class="repo-link" target="_blank">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+                API
+            </a>
+            <a href="https://github.com/AAB-corp/cyberimpl-base-core" class="repo-link" target="_blank">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+                Core
+            </a>
+            <div class="repo-stats">
+                <span>📅 Последнее обновление: 03.11.2025</span>
+            </div>
+        </div>
+
+        <div class="repo-card">
             <div class="repo-title">LehaMnemo</div>
             <div class="repo-description">
                 Мощный инструмент для запоминания с фокусом на минимализм и эффективность
@@ -233,7 +259,7 @@
             .then(html => {
                 document.getElementById('footer-container').innerHTML = html;
                 
-                // Добавляем стили для футера
+                // Стили для футера
                 const style = document.createElement('style');
                 style.textContent = `
                     footer {
