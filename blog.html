@@ -14,7 +14,7 @@
             overflow-x: hidden;
         }
 
-/* Контейнер меню */
+        /* Контейнер меню */
         .cyber-menu {
             width: 280px;
             height: 100vh;
@@ -34,26 +34,28 @@
             left: 0;
         }
 
- /* Основное содержимое меню с прокруткой */
+        /* Основное содержимое меню с прокруткой */
         .menu-scrollable {
             flex: 1;
             overflow-y: auto;
             padding: 80px 0 20px;
         }
 
-/* Стилизация скроллбара */
+        /* Стилизация скроллбара */
         .menu-scrollable::-webkit-scrollbar {
             width: 5px;
         }
+
         .menu-scrollable::-webkit-scrollbar-track {
             background: rgba(15, 15, 26, 0.5);
         }
+
         .menu-scrollable::-webkit-scrollbar-thumb {
             background-color: #6e44ff;
             border-radius: 3px;
         }
 
-/* Кнопка бургера */
+        /* Кнопка бургера */
         .menu-toggle {
             position: fixed;
             top: 15px;
@@ -116,11 +118,12 @@
             box-shadow: 0 0 10px rgba(110, 68, 255, 0.3);
         }
 
- /* Активная кнопка (текущая страница) */
+        /* Активная кнопка (текущая страница) */
         .menu-item.active {
             background: rgba(110, 68, 255, 0.4);
             border-left: 2px solid #e0e0e0;
         }
+
         .menu-item.active:after {
             content: '>';
             position: absolute;
@@ -130,8 +133,12 @@
         }
 
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
         }
 
         .menu-item:hover {
@@ -140,7 +147,7 @@
             box-shadow: 0 0 15px rgba(110, 68, 255, 0.5);
         }
 
-.desktop-version-btn {
+        .desktop-version-btn {
             background: transparent !important;
             border-left: none !important;
             box-shadow: none !important;
@@ -160,7 +167,7 @@
         }
 
 
-/* Меню-Футер */
+        /* Меню-Футер */
 
         .menu-footer {
             margin-top: 30px;
@@ -168,13 +175,13 @@
             font-size: 12px;
             text-align: center;
             color: rgba(176, 176, 192, 0.7);
-font-family: 'Courier New', monospace;
+            font-family: 'Courier New', monospace;
         }
 
         /* Стили для контента */
         .content-wrapper {
             margin-left: 150px;
-margin-right: 150px;
+            margin-right: 150px;
             padding: 30px;
             transition: margin-left 0.3s ease-in-out;
         }
@@ -241,10 +248,10 @@ margin-right: 150px;
             width: 50%;
             height: 100%;
             background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(110, 68, 255, 0.1),
-                transparent
+                    90deg,
+                    transparent,
+                    rgba(110, 68, 255, 0.1),
+                    transparent
             );
             transition: 0.5s;
         }
@@ -294,150 +301,145 @@ margin-right: 150px;
         }
 
         /* Адаптивность */
-        @media (max-width: 768px)  {
+        @media (max-width: 768px) {
             .content-wrapper {
                 margin-left: 0;
-margin-right: 0;
+                margin-right: 0;
                 padding: 20px;
             }
-            
+
             .cyber-menu {
                 width: 240px;
                 left: -240px;
             }
-            
+
             .blog-header h1 {
                 font-size: 2rem;
             }
-            
+
 
         }
 
-    @media (max-width: 480px) {
-.content-wrapper {
+        @media (max-width: 480px) {
+            .content-wrapper {
                 margin-left: 0;
-margin-right: 0;
+                margin-right: 0;
                 padding: 20px;
             }
-            
-.article-card {
+
+            .article-card {
                 padding: 15px;
             }
-            
+
             .article-title {
                 font-size: 1.2em;
             }
-            
+
             .blog-header h1 {
                 font-size: 1.8rem;
             }
-.cyber-menu {
-                    width: 240px;
-                    left: -240px;
-                }
-  
-                .menu-scrollable {
-                    padding-top: 60px;
-                }
-                .menu-tooltip {
-                    font-size: 12px;
-                }
+
+            .cyber-menu {
+                width: 240px;
+                left: -240px;
+            }
+
+            .menu-scrollable {
+                padding-top: 60px;
+            }
+
+            .menu-tooltip {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Меню -->
-    <div class="menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+<!-- Меню -->
+<div class="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
 
-    <nav class="cyber-menu">
-        <div class="menu-scrollable">
-            <a href="index.html" class="menu-item">
-                <span class="menu-icon">⌂</span> &nbsp;INDEX.html
-            </a>
+<nav class="cyber-menu">
+    <div class="menu-scrollable">
+        <a href="index.html" class="menu-item">
+            <span class="menu-icon">⌂</span> &nbsp;INDEX.html
+        </a>
 
-            <a href="projects.html" class="menu-item">    
-                <span class="menu-icon">🚀</span> &nbsp;Projects
-            </a>
+        <a href="projects.html" class="menu-item">
+            <span class="menu-icon">🚀</span> &nbsp;Projects
+        </a>
 
-            <a href="blog.html" class="menu-item active">
-                <span class="menu-icon">📝</span> &nbsp;Blog
-            </a>
+        <a href="blog.html" class="menu-item active">
+            <span class="menu-icon">📝</span> &nbsp;Blog
+        </a>
 
-            <a href="contacts.html" class="menu-item">
-                <span class="menu-icon">📧</span> &nbsp;>_Contact
-            </a>
-            <div class="menu-footer">
-                
-            </div>
-           
-            <div class="menu-footer">
-                © 2025 | Feel free to copy anything*
-            </div>
-        </div>
-    </nav>
+        <a href="contacts.html" class="menu-item">
+            <span class="menu-icon">📧</span> &nbsp;>_Contact
+        </a>
+        <div class="menu-footer">
 
-    <!-- Контент с карточками -->
-    <div class="content-wrapper">
-        <!-- Заголовок /blog -->
-        <div class="blog-header">
-            <h1>&ensp;&ensp;&ensp;&ensp;/blog</h1>
         </div>
 
-        <div class="articles-grid">
-            <!-- Статья -->
-            <a href="articles/ai_as_your_digital_mirror.html" class="article-card">
-                <div class="article-meta">
-                    <span>18.05.2025</span>
-                    <span>2 мин</span>
-                </div>
-                <h2 class="article-title">AI — зеркало пользователя</h2>
-                <p class="article-excerpt">Когда-то ИИ был просто инструментом — безликим и предсказуемым. Сегодня он стал чем-то бОльшим...</p>
-                <div class="article-tags">
-                    <span class="article-tag">#ИИ</span>
-                    <span class="article-tag">#ЦифровоеОтражение</span>
-                    <span class="article-tag">#ПсихологияТехнологий</span>
-                    <span class="article-tag">#Этика</span>
-                </div>
-            </a>
+        <div class="menu-footer">
+            © 2026 | Feel free to copy anything*
         </div>
     </div>
+</nav>
+
+<!-- Контент с карточками -->
+<div class="content-wrapper">
+    <!-- Заголовок /blog -->
+    <div class="blog-header">
+        <h1>&ensp;&ensp;&ensp;&ensp;/blog</h1>
+    </div>
+
+    <div class="articles-grid">
+        <!-- Статья -->
+        <a href="articles/ai_as_your_digital_mirror.html" class="article-card">
+            <div class="article-meta">
+                <span>18.05.2025</span>
+                <span>2 мин</span>
+            </div>
+            <h2 class="article-title">AI — зеркало пользователя</h2>
+            <p class="article-excerpt">Когда-то ИИ был просто инструментом — безликим и предсказуемым. Сегодня он стал
+                чем-то бОльшим...</p>
+            <div class="article-tags">
+                <span class="article-tag">#ИИ</span>
+                <span class="article-tag">#ЦифровоеОтражение</span>
+                <span class="article-tag">#ПсихологияТехнологий</span>
+                <span class="article-tag">#Этика</span>
+            </div>
+        </a>
+    </div>
+</div>
 
 
+<script>
+    // Скрипт для меню
+    const menuToggle = document.querySelector('.menu-toggle');
+    const cyberMenu = document.querySelector('.cyber-menu');
 
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menuToggle.classList.toggle('active');
+        cyberMenu.classList.toggle('active');
+        document.body.style.overflow = cyberMenu.classList.contains('active') ? 'hidden' : '';
+    });
 
+    document.addEventListener('click', () => {
+        if (cyberMenu.classList.contains('active')) {
+            menuToggle.classList.remove('active');
+            cyberMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
 
-
-
-
-
-
-    <script>
-        // Скрипт для меню
-        const menuToggle = document.querySelector('.menu-toggle');
-        const cyberMenu = document.querySelector('.cyber-menu');
-
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            menuToggle.classList.toggle('active');
-            cyberMenu.classList.toggle('active');
-            document.body.style.overflow = cyberMenu.classList.contains('active') ? 'hidden' : '';
-        });
-
-        document.addEventListener('click', () => {
-            if (cyberMenu.classList.contains('active')) {
-                menuToggle.classList.remove('active');
-                cyberMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        cyberMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-    </script>
+    cyberMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+</script>
 </body>
 </html>

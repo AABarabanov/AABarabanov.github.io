@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index</title>
     <style>
-        
+
         html, body {
             margin: 0;
             padding: 0;
@@ -13,7 +13,7 @@
             height: 100%;
             overflow-x: hidden;
         }
-        
+
         body {
             background: #1E1F22;
             color: #e0e0e0;
@@ -22,246 +22,247 @@
         }
 
         /* Контейнер меню */
-            .cyber-menu {
-                width: 280px;
-                height: 100vh;
-                background: rgba(15, 15, 26, 0.98);
-                border-right: 1px solid #6e44ff;
-                position: fixed;
-                backdrop-filter: blur(8px);
-                z-index: 100;
-                left: -280px;
-                transition: left 0.3s ease-in-out;
-                box-shadow: 0 0 30px rgba(110, 68, 255, 0.4);
-                display: flex;
-                flex-direction: column;
-            }
+        .cyber-menu {
+            width: 280px;
+            height: 100vh;
+            background: rgba(15, 15, 26, 0.98);
+            border-right: 1px solid #6e44ff;
+            position: fixed;
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            left: -280px;
+            transition: left 0.3s ease-in-out;
+            box-shadow: 0 0 30px rgba(110, 68, 255, 0.4);
+            display: flex;
+            flex-direction: column;
+        }
 
-            .cyber-menu.active {
-                left: 0;
-            }
+        .cyber-menu.active {
+            left: 0;
+        }
 
-            /* Основное содержимое меню с прокруткой */
-            .menu-scrollable {
-                flex: 1;
-                overflow-y: auto;
-                padding: 80px 0 20px;
-            }
+        /* Основное содержимое меню с прокруткой */
+        .menu-scrollable {
+            flex: 1;
+            overflow-y: auto;
+            padding: 80px 0 20px;
+        }
 
-            /* Стилизация скроллбара */
-            .menu-scrollable::-webkit-scrollbar {
-                width: 5px;
-            }
-            .menu-scrollable::-webkit-scrollbar-track {
-                background: rgba(15, 15, 26, 0.5);
-            }
-            .menu-scrollable::-webkit-scrollbar-thumb {
-                background-color: #6e44ff;
-                border-radius: 3px;
-            }
+        /* Стилизация скроллбара */
+        .menu-scrollable::-webkit-scrollbar {
+            width: 5px;
+        }
 
-            /* Обертка для бургера и подсказки */
-            .menu-toggle-wrapper {
-                position: fixed;
-                top: 15px;
-                left: 15px;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                z-index: 101;
-                transition: all 0.3s ease;
-            }
+        .menu-scrollable::-webkit-scrollbar-track {
+            background: rgba(15, 15, 26, 0.5);
+        }
 
-            /* Кнопка бургера */
-            .menu-toggle {
-                width: 30px;
-                height: 22px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                cursor: pointer;
-                background: transparent;
-                padding: 5px;
-                transition: all 0.3s;
-            }
+        .menu-scrollable::-webkit-scrollbar-thumb {
+            background-color: #6e44ff;
+            border-radius: 3px;
+        }
 
-            .menu-toggle span {
-                display: block;
-                height: 2px;
-                width: 100%;
-                background: #e0e0e0;
-                transition: all 0.3s ease;
-                transform-origin: left center;
-            }
+        /* Обертка для бургера и подсказки */
+        .menu-toggle-wrapper {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 101;
+            transition: all 0.3s ease;
+        }
 
-            .menu-toggle:hover span {
-                background: #6e44ff;
-            }
+        /* Кнопка бургера */
+        .menu-toggle {
+            width: 30px;
+            height: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            background: transparent;
+            padding: 5px;
+            transition: all 0.3s;
+        }
 
-            .menu-toggle.active span:nth-child(1) {
-                transform: rotate(45deg) translate(1px, -1px);
-                background: #6e44ff;
-                width: 110%;
-            }
+        .menu-toggle span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background: #e0e0e0;
+            transition: all 0.3s ease;
+            transform-origin: left center;
+        }
 
-            .menu-toggle.active span:nth-child(2) {
-                opacity: 0;
-                width: 0;
-            }
+        .menu-toggle:hover span {
+            background: #6e44ff;
+        }
 
-            .menu-toggle.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(1px, 1px);
-                background: #6e44ff;
-                width: 110%;
-            }
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(1px, -1px);
+            background: #6e44ff;
+            width: 110%;
+        }
 
-            /* Подсказка с анимацией */
-            .menu-tooltip {
-                position: relative;
-                color: #e0e0e0;
-                font-size: 14px;
-                padding-left: 15px;
-                opacity: 1;
-                transition: opacity 0.3s ease, transform 0.3s ease;
-                animation: pulse 2s infinite;
-            }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+            width: 0;
+        }
 
-            /* Анимация пульсации */
-            @keyframes pulse {
-                0%, 100% { opacity: 0.8; }
-                50% { opacity: 1; }
-            }
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(1px, 1px);
+            background: #6e44ff;
+            width: 110%;
+        }
 
-            /* Скрытие подсказки при активном меню */
-            .menu-toggle.active ~ .menu-tooltip {
-                opacity: 0 !important;
-                transform: translateX(-10px);
-                pointer-events: none;
-                animation: none;
-            }
+        /* Подсказка с анимацией */
+        .menu-tooltip {
+            position: relative;
+            color: #e0e0e0;
+            font-size: 14px;
+            padding-left: 15px;
+            opacity: 1;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            animation: pulse 2s infinite;
+        }
 
-            .menu-item {
-                padding: 12px 20px;
-                margin: 8px 10px;
-                color: #ffffff;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-                border-left: 2px solid #6e44ff;
-                transition: all 0.3s ease;
-                position: relative;
-                background: rgba(110, 68, 255, 0.2);
-                border-radius: 0 6px 6px 0;
-                font-size: 14px;
-                box-shadow: 0 0 10px rgba(110, 68, 255, 0.3);
-            }
-
-            /* Активная кнопка (текущая страница) */
-            .menu-item.active {
-                background: rgba(110, 68, 255, 0.4);
-                border-left: 2px solid #e0e0e0;
-            }
-            .menu-item.active:after {
-                    content: '>';
-                position: absolute;
-                right: 15px;
-                animation: blink 1s infinite;
-                color: #6e44ff;
-            }
-
-            @keyframes blink {
-                0%, 100% { opacity: 1; }
-                50% { opacity: 0; }
-            }
-
-            .menu-item:hover {
-                background: rgba(110, 68, 255, 0.3);
-                transform: translateX(5px);
-                box-shadow: 0 0 15px rgba(110, 68, 255, 0.5);
-            }
-            
-            /* go 2 mobile button*/
-            .desktop-version-btn {
-                background: transparent !important;
-                border-left: none !important;
-                box-shadow: none !important;
+        /* Анимация пульсации */
+        @keyframes pulse {
+            0%, 100% {
                 opacity: 0.8;
-                margin: 20px 24px 5px;
-                font-size: 13px;
-                display: inline-block; /* Изменено на inline-block */
-                color: #b0b0c0;
-                text-decoration: none;
-                padding: 8px 12px;
-                transition: all 0.3s ease;
-                max-width: 200px; /* Ограничиваем максимальную ширину */
+            }
+            50% {
+                opacity: 1;
+            }
+        }
 
-                text-align: center;
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
+        /* Скрытие подсказки при активном меню */
+        .menu-toggle.active ~ .menu-tooltip {
+            opacity: 0 !important;
+            transform: translateX(-10px);
+            pointer-events: none;
+            animation: none;
+        }
+
+        .menu-item {
+            padding: 12px 20px;
+            margin: 8px 10px;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            border-left: 2px solid #6e44ff;
+            transition: all 0.3s ease;
+            position: relative;
+            background: rgba(110, 68, 255, 0.2);
+            border-radius: 0 6px 6px 0;
+            font-size: 14px;
+            box-shadow: 0 0 10px rgba(110, 68, 255, 0.3);
+        }
+
+        /* Активная кнопка (текущая страница) */
+        .menu-item.active {
+            background: rgba(110, 68, 255, 0.4);
+            border-left: 2px solid #e0e0e0;
+        }
+
+        .menu-item.active:after {
+            content: '>';
+            position: absolute;
+            right: 15px;
+            animation: blink 1s infinite;
+            color: #6e44ff;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .menu-item:hover {
+            background: rgba(110, 68, 255, 0.3);
+            transform: translateX(5px);
+            box-shadow: 0 0 15px rgba(110, 68, 255, 0.5);
+        }
+
+        /* go 2 mobile button*/
+        .desktop-version-btn {
+            background: transparent !important;
+            border-left: none !important;
+            box-shadow: none !important;
+            opacity: 0.8;
+            margin: 20px 24px 5px;
+            font-size: 13px;
+            display: inline-block; /* Изменено на inline-block */
+            color: #b0b0c0;
+            text-decoration: none;
+            padding: 8px 12px;
+            transition: all 0.3s ease;
+            max-width: 200px; /* Ограничиваем максимальную ширину */
+
+            text-align: center;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Стили для адаптивной картинки */
+        .menu-icon img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border: 1px solid rgba(176, 176, 192, 0.2);
+            border-radius: 4px;
+        }
+
+        /* Меню-Футер */
+
+        .menu-footer {
+            margin-top: 30px;
+            padding: 0 20px 20px;
+            font-size: 12px;
+            text-align: center;
+            color: rgba(176, 176, 192, 0.7);
+            font-family: 'Courier New', monospace;
+        }
+
+
+        @media (max-width: 480px) {
+            .cyber-menu {
+                width: 240px;
+                left: -240px;
             }
 
-            /* Стили для адаптивной картинки */
-            .menu-icon img {
-                max-width: 100%; 
-                height: auto; 
-                display: block; 
-                margin: 0 auto; 
-                border: 1px solid rgba(176, 176, 192, 0.2);
-                border-radius: 4px;
+
+            .menu-scrollable {
+                padding-top: 60px;
             }
 
-            /* Меню-Футер */
-
-            .menu-footer {
-                margin-top: 30px;
-                padding: 0 20px 20px;
+            .menu-tooltip {
                 font-size: 12px;
-                text-align: center;
-                color: rgba(176, 176, 192, 0.7);
-                font-family: 'Courier New', monospace;
+            }
+        }
+
+        /* Альбомный режим */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .menu-scrollable {
+                padding-top: 40px;
             }
 
-            .corner-banner {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                width: 150px;
-                z-index: 100;
-                filter: drop-shadow(0 0 10px rgba(110, 68, 255, 0.7));
+            .menu-toggle-wrapper {
+                top: 10px;
+                left: 10px;
             }
 
-            @media (max-width: 480px) {
-                .cyber-menu {
-                    width: 240px;
-                    left: -240px;
-                }
-                .corner-banner {
-                    width: 80px;
-                }
-                .menu-scrollable {
-                    padding-top: 60px;
-                }
-                .menu-tooltip {
-                    font-size: 12px;
-                }
-            }
 
-            /* Альбомный режим */
-            @media (max-width: 768px) and (orientation: landscape) {
-                .menu-scrollable {
-                    padding-top: 40px;
-                }
-                .menu-toggle-wrapper {
-                    top: 10px;
-                    left: 10px;
-                }
-                .corner-banner {
-                    top: 10px;
-                    right: 10px;
-                    width: 80px;
-                }
-            }
+        }
 
         /* НОВЫЕ СТИЛИ ДЛЯ ГЛАВНОГО ЭКРАНА */
         .hero-section {
@@ -291,10 +292,9 @@
             color: #fff;
             text-transform: uppercase;
             position: relative;
-            text-shadow: 
-                0.05em 0 0 rgba(255, 0, 0, 0.75),
-                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-                0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+            -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
             animation: glitch 2s infinite;
             margin-bottom: 20px;
             margin-top: 0;
@@ -302,46 +302,39 @@
 
         @keyframes glitch {
             0% {
-                text-shadow: 
-                    0.05em 0 0 rgba(255, 0, 0, 0.75),
-                    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-                    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
             }
             14% {
-                text-shadow: 
-                    0.05em 0 0 rgba(255, 0, 0, 0.75),
-                    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-                    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
             }
             15% {
-                text-shadow: 
-                    -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-                    0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-                    -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
             }
             49% {
-                text-shadow: 
-                    -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
-                    0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
-                    -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
             }
             50% {
-                text-shadow: 
-                    0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-                    0.05em 0 0 rgba(0, 255, 0, 0.75),
-                    0 -0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                0.05em 0 0 rgba(0, 255, 0, 0.75),
+                0 -0.05em 0 rgba(0, 0, 255, 0.75);
             }
             99% {
-                text-shadow: 
-                    0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-                    0.05em 0 0 rgba(0, 255, 0, 0.75),
-                    0 -0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                0.05em 0 0 rgba(0, 255, 0, 0.75),
+                0 -0.05em 0 rgba(0, 0, 255, 0.75);
             }
             100% {
-                text-shadow: 
-                    0.05em 0 0 rgba(255, 0, 0, 0.75),
-                    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-                    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
             }
         }
 
@@ -355,20 +348,14 @@
             margin-top: 0;
         }
 
-        .typing-text {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: #b0b0c0;
-            margin-bottom: 40px;
-            min-height: 60px;
-            border-right: 2px solid #6e44ff;
-            animation: blink-cursor 0.7s infinite;
-            display: inline-block;
-            padding-right: 5px;
-        }
 
         @keyframes blink-cursor {
-            0%, 100% { border-color: #6e44ff; }
-            50% { border-color: transparent; }
+            0%, 100% {
+                border-color: #6e44ff;
+            }
+            50% {
+                border-color: transparent;
+            }
         }
 
         .tech-stack {
@@ -392,7 +379,6 @@
             cursor: default;
             flex-shrink: 0;
         }
-
 
 
         .cta-buttons {
@@ -466,14 +452,6 @@
             pointer-events: none;
         }
 
-        .floating-element {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #6e44ff;
-            border-radius: 50%;
-            animation: float 6s infinite linear;
-        }
 
         @keyframes float {
             0% {
@@ -531,125 +509,127 @@
 </head>
 
 <body>
-    <!-- Обертка для бургера и подсказки -->
-    <div class="menu-toggle-wrapper">
-        <div class="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="menu-tooltip"> <-- Tap to open menu</div>
+<!-- Обертка для бургера и подсказки -->
+<div class="menu-toggle-wrapper">
+    <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
+    <div class="menu-tooltip"> <-- Tap to open menu</div>
+</div>
 
-    <!-- Вертикальное меню -->
-    <nav class="cyber-menu">
-        <div class="menu-scrollable">
-            <a href="index.html" class="menu-item active">
-                <span class="menu-icon">⌂</span> &nbsp;INDEX.html
-            </a>
+<!-- Вертикальное меню -->
+<nav class="cyber-menu">
+    <div class="menu-scrollable">
+        <a href="index.html" class="menu-item active">
+            <span class="menu-icon">⌂</span> &nbsp;INDEX.html
+        </a>
 
-            <a href="projects.html" class="menu-item">    
-                <span class="menu-icon">🚀</span> &nbsp;Projects
-            </a>
+        <a href="projects.html" class="menu-item">
+            <span class="menu-icon">🚀</span> &nbsp;Projects
+        </a>
 
-            <a href="blog.html" class="menu-item">
-                <span class="menu-icon">📝</span> &nbsp;Blog
-            </a>
+        <a href="blog.html" class="menu-item">
+            <span class="menu-icon">📝</span> &nbsp;Blog
+        </a>
 
-            <a href="contacts.html" class="menu-item">
-                <span class="menu-icon">📧</span> &nbsp;>_Contact
-            </a>
+        <a href="contacts.html" class="menu-item">
+            <span class="menu-icon">📧</span> &nbsp;>_Contact
+        </a>
 
-            <!-- Кнопка Desktop version -->
-            <div class="desktop-version-btn">
+        <!-- Кнопка Desktop version -->
+        <div class="desktop-version-btn">
                 <span class="menu-icon">
                     <img src="assets/images/qr2m.png" alt="QR-код">
                 </span>
-            </div>
-
-            <!-- Футер меню -->
-            <div class="menu-footer">
-                © 2025 | Feel free to copy anything*
-            </div>
         </div>
-    </nav>
 
-    <!-- Главный экран -->
-    <section class="hero-section">
-        <div class="matrix-bg" id="matrixCanvas"></div>
-        <div class="floating-elements" id="floatingElements"></div>
-        
-        <div class="hero-content">
-            <h1 class="cyber-glitch">ALEX BARABANOV</h1>
-            <div class="subtitle">BACKEND_DEV</div>
-            
-            <div class="tech-stack">
-                <div class="tech-item" style="font-weight: bold;">Java</div>
-                <div class="tech-item" style="font-size: 0.9em;">Spring Boot</div>
-                <div class="tech-item" style="font-size: 0.9em;">Maven</div>
-            </div>
-            <div class="tech-stack">
-                <div class="tech-item" style="font-weight: bold;">Python</div>
-                <div class="tech-item" style="font-size: 0.9em;">Django</div>
-                <div class="tech-item" style="font-size: 0.9em;">Flask</div>
-            </div>
-            <div class="tech-stack">
-                <div class="tech-item" style="font-weight: bold;">SQL</div>
-                <div class="tech-item" style="font-size: 0.9em;">PostgreSQL</div>
-                <div class="tech-item" style="font-size: 0.9em;">SQLite</div>
-            </div>
-            <div class="tech-stack">
-                <div class="tech-item" style="font-size: 0.9em;">Git</div>
-                <div class="tech-item" style="font-size: 0.9em;">RESTful API</div>
-                <div class="tech-item" style="font-size: 0.9em;">JSON</div>
-                <div class="tech-item" style="font-size: 0.9em;">Linux</div>
-            </div>
-            
-            <div class="cta-buttons">
-                <a href="projects.html" class="cta-btn primary">View Projects</a>
-                <a href="contacts.html" class="cta-btn">Get In Touch</a>
-            </div>
+        <!-- Футер меню -->
+        <div class="menu-footer">
+            © 2026 | Feel free to copy anything*
         </div>
-    </section>
-
-    <!-- Индикатор статуса -->
-    <div class="status-indicator">
-        <div class="pulse-dot"></div>
-        <span>AVAILABLE FOR FREELANCE</span>
     </div>
+</nav>
 
-    <script>
-        // Управление меню
-        const menuToggle = document.querySelector('.menu-toggle');
-        const cyberMenu = document.querySelector('.cyber-menu');
-        const menuTooltip = document.querySelector('.menu-tooltip');
+<!-- Главный экран -->
+<section class="hero-section">
+    <div class="matrix-bg" id="matrixCanvas"></div>
+    <div class="floating-elements" id="floatingElements"></div>
 
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            menuToggle.classList.toggle('active');
-            cyberMenu.classList.toggle('active');
-            document.body.style.overflow = cyberMenu.classList.contains('active') ? 'hidden' : '';
-        });
+    <div class="hero-content">
+        <h1 class="cyber-glitch">ALEX BARABANOV</h1>
+        <div class="subtitle">BACKEND_DEV</div>
 
-        // Закрытие при клике вне меню
-        document.addEventListener('click', () => {
-            if (cyberMenu.classList.contains('active')) {
-                menuToggle.classList.remove('active');
-                cyberMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
+        <div class="tech-stack">
+            <div class="tech-item" style="font-weight: bold;">Java</div>
+            <div class="tech-item" style="font-size: 0.9em;">Spring Boot</div>
+            <div class="tech-item" style="font-size: 0.9em;">Maven</div>
+            <div class="tech-item" style="font-size: 0.9em;">JUnit 5</div>
+        </div>
+        <div class="tech-stack">
+            <div class="tech-item" style="font-weight: bold;">Python</div>
+            <div class="tech-item" style="font-size: 0.9em;">Django</div>
+            <div class="tech-item" style="font-size: 0.9em;">Flask</div>
+        </div>
+        <div class="tech-stack">
+            <div class="tech-item" style="font-weight: bold;">SQL</div>
+            <div class="tech-item" style="font-size: 0.9em;">PostgreSQL</div>
+            <div class="tech-item" style="font-size: 0.9em;">SQLite</div>
+        </div>
+        <div class="tech-stack">
+            <div class="tech-item" style="font-size: 0.9em;">Git</div>
+            <div class="tech-item" style="font-size: 0.9em;">RESTful API</div>
+            <div class="tech-item" style="font-size: 0.9em;">Linux</div>
+            <div class="tech-item" style="font-size: 0.9em;">Docker</div>
+            <div class="tech-item" style="font-size: 0.9em;">Docker Compose</div>
+        </div>
 
-        // Предотвращение закрытия при клике на само меню
-        cyberMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
+        <div class="cta-buttons">
+            <a href="projects.html" class="cta-btn primary">View Projects</a>
+            <a href="contacts.html" class="cta-btn">Get In Touch</a>
+        </div>
+    </div>
+</section>
 
-        // FIX вертикальной прокрутки
-        // window.addEventListener('load', function() {
-        //     document.documentElement.style.overflowY = 'hidden';
-        //     document.body.style.overflowY = 'hidden';
-        //});
-    </script>
+<!-- Индикатор статуса -->
+<div class="status-indicator">
+    <div class="pulse-dot"></div>
+    <span>AVAILABLE FOR FREELANCE</span>
+</div>
+
+<script>
+    // Управление меню
+    const menuToggle = document.querySelector('.menu-toggle');
+    const cyberMenu = document.querySelector('.cyber-menu');
+    const menuTooltip = document.querySelector('.menu-tooltip');
+
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menuToggle.classList.toggle('active');
+        cyberMenu.classList.toggle('active');
+        document.body.style.overflow = cyberMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Закрытие при клике вне меню
+    document.addEventListener('click', () => {
+        if (cyberMenu.classList.contains('active')) {
+            menuToggle.classList.remove('active');
+            cyberMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Предотвращение закрытия при клике на само меню
+    cyberMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    // FIX вертикальной прокрутки
+    // window.addEventListener('load', function() {
+    //     document.documentElement.style.overflowY = 'hidden';
+    //     document.body.style.overflowY = 'hidden';
+    //});
+</script>
 </body>
 </html>
