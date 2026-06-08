@@ -1,416 +1,448 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI — зеркало пользователя</title>
-    <style>
-        /* Базовые стили */
-        body {
-            margin: 0;
-            background: #1c2333;
-            color: #e0e0e0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            overflow-x: hidden;
-            line-height: 1.6;
-            padding-bottom: 40px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI — зеркало пользователя</title>
+  <style>
+      /* Базовые стили */
+      body {
+          margin: 0;
+          background: #1c2333;
+          color: #e0e0e0;
+          font-family: 'Segoe UI', Arial, sans-serif;
+          overflow-x: hidden;
+          line-height: 1.6;
+          padding-bottom: 40px;
+      }
 
-        /* Контейнер меню */
-        .cyber-menu {
-top: 0;            
-width: 280px;
-            height: 100vh;
-            background: rgba(15, 15, 26, 0.98);
-            border-right: 1px solid #6e44ff;
-            position: fixed;
-            backdrop-filter: blur(8px);
-            z-index: 100;
-            left: -280px;
-            transition: left 0.3s ease-in-out;
-            box-shadow: 0 0 30px rgba(110, 68, 255, 0.4);
-            display: flex;
-            flex-direction: column;
-        }
+      /* Контейнер меню */
+      .cyber-menu {
+          top: 0;
+          width: 280px;
+          height: 100vh;
+          background: rgba(15, 15, 26, 0.98);
+          border-right: 1px solid #6e44ff;
+          position: fixed;
+          backdrop-filter: blur(8px);
+          z-index: 100;
+          left: -280px;
+          transition: left 0.3s ease-in-out;
+          box-shadow: 0 0 30px rgba(110, 68, 255, 0.4);
+          display: flex;
+          flex-direction: column;
+      }
 
-        .cyber-menu.active {
-            left: 0;
-        }
+      .cyber-menu.active {
+          left: 0;
+      }
 
-        /* Основное содержимое меню с прокруткой */
-        .menu-scrollable {
-            flex: 1;
-            overflow-y: auto;
-            padding: 80px 0 20px;
-        }
+      /* Основное содержимое меню с прокруткой */
+      .menu-scrollable {
+          flex: 1;
+          overflow-y: auto;
+          padding: 80px 0 20px;
+      }
 
-        /* Стилизация скроллбара */
-        .menu-scrollable::-webkit-scrollbar {
-            width: 5px;
-        }
-        .menu-scrollable::-webkit-scrollbar-track {
-            background: rgba(15, 15, 26, 0.5);
-        }
-        .menu-scrollable::-webkit-scrollbar-thumb {
-            background-color: #6e44ff;
-            border-radius: 3px;
-        }
+      /* Стилизация скроллбара */
+      .menu-scrollable::-webkit-scrollbar {
+          width: 5px;
+      }
 
-        /* Кнопка бургера */
-        .menu-toggle {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            width: 30px;
-            height: 22px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-            z-index: 101;
-            background: transparent;
-            padding: 5px;
-            transition: all 0.3s;
-        }
+      .menu-scrollable::-webkit-scrollbar-track {
+          background: rgba(15, 15, 26, 0.5);
+      }
 
-        .menu-toggle span {
-            display: block;
-            height: 2px;
-            width: 100%;
-            background: #e0e0e0;
-            transition: all 0.3s ease;
-            transform-origin: left center;
-        }
+      .menu-scrollable::-webkit-scrollbar-thumb {
+          background-color: #6e44ff;
+          border-radius: 3px;
+      }
 
-        .menu-toggle:hover span {
-            background: #6e44ff;
-        }
+      /* Кнопка бургера */
+      .menu-toggle {
+          position: fixed;
+          top: 15px;
+          left: 15px;
+          width: 30px;
+          height: 22px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          cursor: pointer;
+          z-index: 101;
+          background: transparent;
+          padding: 5px;
+          transition: all 0.3s;
+      }
 
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(1px, -1px);
-            background: #6e44ff;
-            width: 110%;
-        }
+      .menu-toggle span {
+          display: block;
+          height: 2px;
+          width: 100%;
+          background: #e0e0e0;
+          transition: all 0.3s ease;
+          transform-origin: left center;
+      }
 
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-            width: 0;
-        }
+      .menu-toggle:hover span {
+          background: #6e44ff;
+      }
 
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(1px, 1px);
-            background: #6e44ff;
-            width: 110%;
-        }
+      .menu-toggle.active span:nth-child(1) {
+          transform: rotate(45deg) translate(1px, -1px);
+          background: #6e44ff;
+          width: 110%;
+      }
 
-        
-        .menu-item {
-            padding: 12px 20px;
-            margin: 8px 10px;
-            color: #ffffff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            border-left: 2px solid #6e44ff;
-            transition: all 0.3s ease;
-            position: relative;
-            background: rgba(110, 68, 255, 0.2);
-            border-radius: 0 6px 6px 0;
-            font-size: 14px;
-            box-shadow: 0 0 10px rgba(110, 68, 255, 0.3);
-        }
+      .menu-toggle.active span:nth-child(2) {
+          opacity: 0;
+          width: 0;
+      }
 
-        /* Активная кнопка (текущая страница) */
-        .menu-item.active {
-            background: rgba(110, 68, 255, 0.4);
-            border-left: 2px solid #e0e0e0;
-        }
-        .menu-item.active:after {
-            content: '>';
-            position: absolute;
-            right: 15px;
-            animation: blink 1s infinite;
-            color: #6e44ff;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .menu-item:hover {
-            background: rgba(110, 68, 255, 0.3);
-            transform: translateX(5px);
-            box-shadow: 0 0 15px rgba(110, 68, 255, 0.5);
-        }
-
-        .desktop-version-btn {
-            background: transparent !important;
-            border-left: none !important;
-            box-shadow: none !important;
-            opacity: 0.6;
-            margin: 20px 10px 5px;
-            font-size: 13px;
-            display: block;
-            color: #b0b0c0;
-        }
-
-        .desktop-version-btn:hover {
-            margin-top: 20px;
-            opacity: 0.9;
-            background: transparent !important;
-            border-left: none !important;
-            box-shadow: none !important;
-        }
-
-        .menu-footer {
-            margin-top: 30px;
-            padding: 0 20px 20px;
-            font-size: 12px;
-            text-align: center;
-            color: rgba(176, 176, 192, 0.7);
-        }
+      .menu-toggle.active span:nth-child(3) {
+          transform: rotate(-45deg) translate(1px, 1px);
+          background: #6e44ff;
+          width: 110%;
+      }
 
 
+      .menu-item {
+          padding: 12px 20px;
+          margin: 8px 10px;
+          color: #ffffff;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          border-left: 2px solid #6e44ff;
+          transition: all 0.3s ease;
+          position: relative;
+          background: rgba(110, 68, 255, 0.2);
+          border-radius: 0 6px 6px 0;
+          font-size: 14px;
+          box-shadow: 0 0 10px rgba(110, 68, 255, 0.3);
+      }
 
-        /* Стили для статьи */
-        .article-container {
-            max-width: 90%;
-            margin: 70px auto 40px;
-            padding: 0 15px;
-        }
+      /* Активная кнопка (текущая страница) */
+      .menu-item.active {
+          background: rgba(110, 68, 255, 0.4);
+          border-left: 2px solid #e0e0e0;
+      }
 
-        .article-title {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-            color: #b892ff;
-            line-height: 1.3;
-        }
+      .menu-item.active:after {
+          content: '>';
+          position: absolute;
+          right: 15px;
+          animation: blink 1s infinite;
+          color: #6e44ff;
+      }
 
-        .article-date {
-            color: #8a8aa8;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            display: block;
-        }
+      @keyframes blink {
+          0%, 100% {
+              opacity: 1;
+          }
+          50% {
+              opacity: 0;
+          }
+      }
 
-        .article-excerpt {
-            font-style: italic;
-            color: #a0a0c0;
-            margin-bottom: 30px;
-            padding: 15px;
-            border-left: 2px solid #6e44ff;
-            background: rgba(30, 35, 45, 0.4);
-        }
+      .menu-item:hover {
+          background: rgba(110, 68, 255, 0.3);
+          transform: translateX(5px);
+          box-shadow: 0 0 15px rgba(110, 68, 255, 0.5);
+      }
 
-        .article-content {
-            margin-bottom: 30px;
-        }
+      .desktop-version-btn {
+          background: transparent !important;
+          border-left: none !important;
+          box-shadow: none !important;
+          opacity: 0.6;
+          margin: 20px 10px 5px;
+          font-size: 13px;
+          display: block;
+          color: #b0b0c0;
+      }
 
-        .article-content p {
-            margin-bottom: 20px;
-        }
+      .desktop-version-btn:hover {
+          margin-top: 20px;
+          opacity: 0.9;
+          background: transparent !important;
+          border-left: none !important;
+          box-shadow: none !important;
+      }
 
-        .article-content img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 25px auto;
-            border-radius: 4px;
-            border: 1px solid #2a3446;
-        }
+      .menu-footer {
+          margin-top: 30px;
+          padding: 0 20px 20px;
+          font-size: 12px;
+          text-align: center;
+          color: rgba(176, 176, 192, 0.7);
+      }
 
-        .article-content em {
-            color: #b892ff;
-        }
 
-        .article-content strong {
-            color: #ffffff;
-        }
+      /* Стили для статьи */
+      .article-container {
+          max-width: 90%;
+          margin: 70px auto 40px;
+          padding: 0 15px;
+      }
 
-        .article-tags {
-            color: #8a8aa8;
-            font-size: 0.9rem;
-            margin-top: 30px;
-            padding-top: 15px;
-            border-top: 1px solid #2a3446;
-        }
+      .article-title {
+          font-size: 1.8rem;
+          margin-bottom: 8px;
+          color: #b892ff;
+          line-height: 1.3;
+      }
 
-        /* Кнопка "Наверх" */
-        #scrollTopBtn {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 99;
-            border: none;
-            outline: none;
-            background-color: rgba(110, 68, 255, 0.7);
-            color: white;
-            cursor: pointer;
-            padding: 12px 15px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            transition: background-color 0.3s;
-        }
+      .article-date {
+          color: #8a8aa8;
+          font-size: 0.9rem;
+          margin-bottom: 20px;
+          display: block;
+      }
 
-        #scrollTopBtn:hover {
-            background-color: #6e44ff;
-        }
+      .article-excerpt {
+          font-style: italic;
+          color: #a0a0c0;
+          margin-bottom: 30px;
+          padding: 15px;
+          border-left: 2px solid #6e44ff;
+          background: rgba(30, 35, 45, 0.4);
+      }
 
-        @media (max-width: 480px) {
-            .cyber-menu {
-                width: 240px;
-                left: -240px;
-            }
-            .corner-banner {
-                width: 80px;
-            }
-            .menu-scrollable {
-                padding-top: 60px;
-            }
-            .article-title {
-                font-size: 1.5rem;
-            }
-        }
+      .article-content {
+          margin-bottom: 30px;
+      }
 
-        /* Альбомный режим */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .menu-scrollable {
-                padding-top: 40px;
-            }
-            .menu-toggle {
-                top: 10px;
-                left: 10px;
-            }
-            .corner-banner {
-                top: 10px;
-                right: 10px;
-                width: 80px;
-            }
-        }
+      .article-content p {
+          margin-bottom: 20px;
+      }
 
-        /* Для очень маленьких экранов */
-        @media (max-width: 360px) {
-            .article-title {
-                font-size: 1.3rem;
-            }
-            .article-container {
-                margin-top: 60px;
-            }
-        }
-    </style>
+      .article-content img {
+          max-width: 100%;
+          height: auto;
+          display: block;
+          margin: 25px auto;
+          border-radius: 4px;
+          border: 1px solid #2a3446;
+      }
+
+      .article-content em {
+          color: #b892ff;
+      }
+
+      .article-content strong {
+          color: #ffffff;
+      }
+
+      .article-tags {
+          color: #8a8aa8;
+          font-size: 0.9rem;
+          margin-top: 30px;
+          padding-top: 15px;
+          border-top: 1px solid #2a3446;
+      }
+
+      /* Кнопка "Наверх" */
+      #scrollTopBtn {
+          display: none;
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          z-index: 99;
+          border: none;
+          outline: none;
+          background-color: rgba(110, 68, 255, 0.7);
+          color: white;
+          cursor: pointer;
+          padding: 12px 15px;
+          border-radius: 50%;
+          font-size: 1.2rem;
+          transition: background-color 0.3s;
+      }
+
+      #scrollTopBtn:hover {
+          background-color: #6e44ff;
+      }
+
+      @media (max-width: 480px) {
+          .cyber-menu {
+              width: 240px;
+              left: -240px;
+          }
+
+          .corner-banner {
+              width: 80px;
+          }
+
+          .menu-scrollable {
+              padding-top: 60px;
+          }
+
+          .article-title {
+              font-size: 1.5rem;
+          }
+      }
+
+      /* Альбомный режим */
+      @media (max-width: 768px) and (orientation: landscape) {
+          .menu-scrollable {
+              padding-top: 40px;
+          }
+
+          .menu-toggle {
+              top: 10px;
+              left: 10px;
+          }
+
+          .corner-banner {
+              top: 10px;
+              right: 10px;
+              width: 80px;
+          }
+      }
+
+      /* Для очень маленьких экранов */
+      @media (max-width: 360px) {
+          .article-title {
+              font-size: 1.3rem;
+          }
+
+          .article-container {
+              margin-top: 60px;
+          }
+      }
+  </style>
 </head>
 <body>
-    <!-- Кнопка меню -->
-    <div class="menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
+<!-- Кнопка меню -->
+<div class="menu-toggle">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<!-- Вертикальное меню -->
+<nav class="cyber-menu">
+  <div class="menu-scrollable">
+    <a href="https://aabarabanov.github.io/index.html" class="menu-item">
+      <span class="menu-icon">⌂</span> &nbsp;INDEX.html
+    </a>
+
+    <a href="https://aabarabanov.github.io/projects.html" class="menu-item">
+      <span class="menu-icon">🚀</span> &nbsp;Projects
+    </a>
+
+    <a href="https://aabarabanov.github.io/blog.html" class="menu-item">
+      <span class="menu-icon">📝</span> &nbsp;Blog
+    </a>
+
+    <a href="https://aabarabanov.github.io/contacts.html" class="menu-item">
+      <span class="menu-icon">📧</span> &nbsp;>_Contact
+    </a>
+
+
+    <!-- Футер меню
+    <div class="menu-footer"></div>
+    <div class="menu-footer">
+        AABarabanov · 2026
+    </div> -->
+  </div>
+</nav>
+
+
+<!-- Контейнер для статьи -->
+<div class="article-container">
+  <div class="article-card">
+    <div class="article-title">AI — зеркало пользователя</div>
+    <div class="article-date">26 мая 2025</div>
+
+    <div class="article-content">
+      <p> Когда-то ИИ был просто инструментом — безликим и предсказуемым. Сегодня он стал чем-то большим: цифровым
+        отражением нас самих. Представьте, что ваше утро начинается с чата, где нейросеть уже научилась шутить как вы,
+        строить фразы как вы, даже ошибаться... как вы. Здорово? Не всегда.</p>
+
+      <img src="https://aabarabanov.github.io/assets/images/ai-mirror.jpeg" class="article-content img"
+           alt="AI — зеркало пользователя" style="display:block; margin: 24px auto;">
+
+      <p><em>Все совпадения с реальными ИИ-сервисами случайны.</em></p>
+      <p>Помните, как в детстве играли с эхом в горах? Стоило крикнуть глупость — и она возвращалась к вам, многократно
+        усиленная. Современные ИИ работают похожим образом. ChatGPT, который подстраивается под ваш стиль общения — не
+        просто удобный функционал. Это начало сложных отношений, где технология становится нашим цифровым альтер
+        эго.</p>
+      <p>Возьмём историю 2023 года, когда один ИИ-ассистент внезапно заговорил жаргоном трейдеров. Казалось бы, мелочь.
+        Но за этим стоит важный принцип: нейросети не просто копируют нас — они усиливают. Хорошее и плохое. Вашу
+        эрудицию — и ваши предубеждения. Вашу креативность — и ваши когнитивные искажения.</p>
+      <p>Особенно тревожно это выглядит в соцсетях. Алгоритмы уже давно подсовывают нам контент, который соответствует
+        нашим взглядам. Теперь же ИИ начал подстраивать под нас даже форму подачи информации. Получается эхо-камера
+        квадрате: мы не только получаем "правильный" контент, но и в "правильной" упаковке.</p>
+      <p>Но есть и хорошие новости. Во-первых, осознание проблемы — уже половина решения. Когда мы понимаем, что имеем
+        дело не с объективным инструментом, а с кривым зеркалом, мы начинаем иначе с ним взаимодействовать. Во-вторых,
+        сами разработчики ИИ стали активно работать над этой проблемой — от фильтрации bias в данных до прозрачности
+        алгоритмов.</p>
+      <p>Главный вопрос, который остаётся открытым: если ИИ — это зеркало, то что важнее — чтобы оно показывало нас
+        такими, какие мы есть, или такими, какими мы могли бы быть? Возможно, истина где-то посередине: идеальное
+        цифровое отражение должно не просто копировать, но и мягко корректировать — как мудрый друг, который и
+        поддерживает, и направляет.</p>
+      <p>ИИ действительно стал нашим цифровым отражением — но у этого зеркала есть тёмная сторона. Он не просто копирует
+        наши слова, а усиливает предубеждения, замыкая нас в эхо-камерах привычных идей. Когда сленг определенного
+        сообщества просачивается в ответы ИИ, а GPT-4 подстраивается под наши противоречивые запросы, возникает вопрос:
+        кто здесь главный — мы или алгоритмы, которые уже научились играть на наших когнитивных слабостях?</p>
+      <p><strong>Вывод прост:</strong> доверяй, но проверяй. Осознанное взаимодействие с ИИ — это не паранойя, а
+        необходимость. Потому что единственное, что должно управлять технологиями — не наше подсознание, а наш разум.
+      </p>
+      <p>И да — если ИИ вдруг начнёт повторять ваши шутки, помните: это не он такой гениальный, а Вы. 😉</p>
     </div>
-
-    <!-- Вертикальное меню -->
-    <nav class="cyber-menu">
-        <div class="menu-scrollable">
-            <a href="https://aabarabanov.github.io/index.html" class="menu-item">
-                <span class="menu-icon">⌂</span> &nbsp;INDEX.html
-            </a>
-
-            <a href="https://aabarabanov.github.io/projects.html" class="menu-item">    
-                <span class="menu-icon">🚀</span> &nbsp;Projects
-            </a>
-
-            <a href="https://aabarabanov.github.io/blog.html" class="menu-item">
-                <span class="menu-icon">📝</span> &nbsp;Blog
-            </a>
-
-            <a href="https://aabarabanov.github.io/contacts.html" class="menu-item">
-                <span class="menu-icon">📧</span> &nbsp;>_Contact
-            </a>
-
-
-
-            <!-- Футер меню -->
-                        <div class="menu-footer"></div>
-            <div class="menu-footer">
-                © 2025 | Feel free to copy anything*
-            </div>
-        </div>
-    </nav>
-
-
-    <!-- Контейнер для статьи -->
-    <div class="article-container">
-        <div class="article-card">
-            <div class="article-title">AI — зеркало пользователя</div>
-            <div class="article-date">26 мая 2025</div>
-
-            <div class="article-content">
-                <p> Когда-то ИИ был просто инструментом — безликим и предсказуемым. Сегодня он стал чем-то большим: цифровым отражением нас самих. Представьте, что ваше утро начинается с чата, где нейросеть уже научилась шутить как вы, строить фразы как вы, даже ошибаться... как вы. Здорово? Не всегда.</p>
-
-                <img src="https://aabarabanov.github.io/assets/images/ai-mirror.jpeg" class="article-content img" alt="AI — зеркало пользователя" style="display:block; margin: 24px auto;">
-
-                <p><em>Все совпадения с реальными ИИ-сервисами случайны.</em></p>
-                <p>Помните, как в детстве играли с эхом в горах? Стоило крикнуть глупость — и она возвращалась к вам, многократно усиленная. Современные ИИ работают похожим образом. ChatGPT, который подстраивается под ваш стиль общения — не просто удобный функционал. Это начало сложных отношений, где технология становится нашим цифровым альтер эго.</p>
-                <p>Возьмём историю 2023 года, когда один ИИ-ассистент внезапно заговорил жаргоном трейдеров. Казалось бы, мелочь. Но за этим стоит важный принцип: нейросети не просто копируют нас — они усиливают. Хорошее и плохое. Вашу эрудицию — и ваши предубеждения. Вашу креативность — и ваши когнитивные искажения.</p>
-                <p>Особенно тревожно это выглядит в соцсетях. Алгоритмы уже давно подсовывают нам контент, который соответствует нашим взглядам. Теперь же ИИ начал подстраивать под нас даже форму подачи информации. Получается эхо-камера квадрате: мы не только получаем "правильный" контент, но и в "правильной" упаковке.</p>
-                <p>Но есть и хорошие новости. Во-первых, осознание проблемы — уже половина решения. Когда мы понимаем, что имеем дело не с объективным инструментом, а с кривым зеркалом, мы начинаем иначе с ним взаимодействовать. Во-вторых, сами разработчики ИИ стали активно работать над этой проблемой — от фильтрации bias в данных до прозрачности алгоритмов.</p>
-                <p>Главный вопрос, который остаётся открытым: если ИИ — это зеркало, то что важнее — чтобы оно показывало нас такими, какие мы есть, или такими, какими мы могли бы быть? Возможно, истина где-то посередине: идеальное цифровое отражение должно не просто копировать, но и мягко корректировать — как мудрый друг, который и поддерживает, и направляет.</p>
-                <p>ИИ действительно стал нашим цифровым отражением — но у этого зеркала есть тёмная сторона. Он не просто копирует наши слова, а усиливает предубеждения, замыкая нас в эхо-камерах привычных идей. Когда сленг определенного сообщества просачивается в ответы ИИ, а GPT-4 подстраивается под наши противоречивые запросы, возникает вопрос: кто здесь главный — мы или алгоритмы, которые уже научились играть на наших когнитивных слабостях?</p>
-                <p><strong>Вывод прост:</strong> доверяй, но проверяй. Осознанное взаимодействие с ИИ — это не паранойя, а необходимость. Потому что единственное, что должно управлять технологиями — не наше подсознание, а наш разум.</p>
-                <p>И да — если ИИ вдруг начнёт повторять ваши шутки, помните: это не он такой гениальный, а Вы. 😉</p>
-            </div>
-            <div class="article-tags">
-                #ИИ #ЦифровоеОтражение #ПсихологияТехнологий #этика
-            </div>
-        </div>
+    <div class="article-tags">
+      #ИИ #ЦифровоеОтражение #ПсихологияТехнологий #этика
     </div>
+  </div>
+</div>
 
-    <button id="scrollTopBtn" title="Наверх">↑</button>
+<button id="scrollTopBtn" title="Наверх">↑</button>
 
-    <script>
-        // Управление меню
-        const menuToggle = document.querySelector('.menu-toggle');
-        const cyberMenu = document.querySelector('.cyber-menu');
+<script>
+    // Управление меню
+    const menuToggle = document.querySelector('.menu-toggle');
+    const cyberMenu = document.querySelector('.cyber-menu');
 
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            menuToggle.classList.toggle('active');
-            cyberMenu.classList.toggle('active');
-            document.body.style.overflow = cyberMenu.classList.contains('active') ? 'hidden' : '';
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menuToggle.classList.toggle('active');
+        cyberMenu.classList.toggle('active');
+        document.body.style.overflow = cyberMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Закрытие при клике вне меню
+    document.addEventListener('click', () => {
+        if (cyberMenu.classList.contains('active')) {
+            menuToggle.classList.remove('active');
+            cyberMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Предотвращение закрытия при клике на само меню
+    cyberMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    // Кнопка "Наверх"
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+    window.onscroll = function () {
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            scrollTopBtn.style.display = 'block';
+        } else {
+            scrollTopBtn.style.display = 'none';
+        }
+    };
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
-
-        // Закрытие при клике вне меню
-        document.addEventListener('click', () => {
-            if (cyberMenu.classList.contains('active')) {
-                menuToggle.classList.remove('active');
-                cyberMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Предотвращение закрытия при клике на само меню
-        cyberMenu.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-
-        // Кнопка "Наверх"
-        const scrollTopBtn = document.getElementById('scrollTopBtn');
-        
-        window.onscroll = function() {
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                scrollTopBtn.style.display = 'block';
-            } else {
-                scrollTopBtn.style.display = 'none';
-            }
-        };
-        
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    </script>
+    });
+</script>
 </body>
 </html>
