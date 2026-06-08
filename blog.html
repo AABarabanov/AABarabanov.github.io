@@ -1,419 +1,419 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>/blog</title>
-    <style>
-        /* Ваши оригинальные стили */
-        body {
-            margin: 0;
-            background: #1c2333;
-            color: #e0e0e0;
-            font-family: monospace;
-            overflow-x: hidden;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>/blog</title>
+  <style>
+      /* Ваши оригинальные стили */
+      body {
+          margin: 0;
+          background: #1c2333;
+          color: #e0e0e0;
+          font-family: monospace;
+          overflow-x: hidden;
+      }
 
-        /* Контейнер меню */
-        .cyber-menu {
-            width: 280px;
-            height: 100vh;
-            background: rgba(15, 15, 26, 0.98);
-            border-right: 1px solid #6e44ff;
-            position: fixed;
-            backdrop-filter: blur(8px);
-            z-index: 100;
-            left: -280px;
-            transition: left 0.3s ease-in-out;
-            box-shadow: 0 0 30px rgba(110, 68, 255, 0.4);
-            display: flex;
-            flex-direction: column;
-        }
+      /* Контейнер меню */
+      .cyber-menu {
+          width: 280px;
+          height: 100vh;
+          background: rgba(15, 15, 26, 0.98);
+          border-right: 1px solid #6e44ff;
+          position: fixed;
+          backdrop-filter: blur(8px);
+          z-index: 100;
+          left: -280px;
+          transition: left 0.3s ease-in-out;
+          box-shadow: 0 0 30px rgba(110, 68, 255, 0.4);
+          display: flex;
+          flex-direction: column;
+      }
 
-        .cyber-menu.active {
-            left: 0;
-        }
+      .cyber-menu.active {
+          left: 0;
+      }
 
-        /* Основное содержимое меню с прокруткой */
-        .menu-scrollable {
-            flex: 1;
-            overflow-y: auto;
-            padding: 80px 0 20px;
-        }
+      /* Основное содержимое меню с прокруткой */
+      .menu-scrollable {
+          flex: 1;
+          overflow-y: auto;
+          padding: 80px 0 20px;
+      }
 
-        /* Стилизация скроллбара */
-        .menu-scrollable::-webkit-scrollbar {
-            width: 5px;
-        }
+      /* Стилизация скроллбара */
+      .menu-scrollable::-webkit-scrollbar {
+          width: 5px;
+      }
 
-        .menu-scrollable::-webkit-scrollbar-track {
-            background: rgba(15, 15, 26, 0.5);
-        }
+      .menu-scrollable::-webkit-scrollbar-track {
+          background: rgba(15, 15, 26, 0.5);
+      }
 
-        .menu-scrollable::-webkit-scrollbar-thumb {
-            background-color: #6e44ff;
-            border-radius: 3px;
-        }
+      .menu-scrollable::-webkit-scrollbar-thumb {
+          background-color: #6e44ff;
+          border-radius: 3px;
+      }
 
-        /* Кнопка бургера */
-        .menu-toggle {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            width: 30px;
-            height: 22px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-            z-index: 101;
-            background: transparent;
-            padding: 5px;
-            transition: all 0.3s;
-        }
+      /* Кнопка бургера */
+      .menu-toggle {
+          position: fixed;
+          top: 15px;
+          left: 15px;
+          width: 30px;
+          height: 22px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          cursor: pointer;
+          z-index: 101;
+          background: transparent;
+          padding: 5px;
+          transition: all 0.3s;
+      }
 
-        .menu-toggle span {
-            display: block;
-            height: 2px;
-            width: 100%;
-            background: #e0e0e0;
-            transition: all 0.3s ease;
-            transform-origin: left center;
-        }
+      .menu-toggle span {
+          display: block;
+          height: 2px;
+          width: 100%;
+          background: #e0e0e0;
+          transition: all 0.3s ease;
+          transform-origin: left center;
+      }
 
-        .menu-toggle:hover span {
-            background: #6e44ff;
-        }
+      .menu-toggle:hover span {
+          background: #6e44ff;
+      }
 
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(1px, -1px);
-            background: #6e44ff;
-            width: 110%;
-        }
+      .menu-toggle.active span:nth-child(1) {
+          transform: rotate(45deg) translate(1px, -1px);
+          background: #6e44ff;
+          width: 110%;
+      }
 
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-            width: 0;
-        }
+      .menu-toggle.active span:nth-child(2) {
+          opacity: 0;
+          width: 0;
+      }
 
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(1px, 1px);
-            background: #6e44ff;
-            width: 110%;
-        }
+      .menu-toggle.active span:nth-child(3) {
+          transform: rotate(-45deg) translate(1px, 1px);
+          background: #6e44ff;
+          width: 110%;
+      }
 
-        .menu-item {
-            padding: 12px 20px;
-            margin: 8px 10px;
-            color: #ffffff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            border-left: 2px solid #6e44ff;
-            transition: all 0.3s ease;
-            position: relative;
-            background: rgba(110, 68, 255, 0.2);
-            border-radius: 0 6px 6px 0;
-            font-size: 14px;
-            box-shadow: 0 0 10px rgba(110, 68, 255, 0.3);
-        }
+      .menu-item {
+          padding: 12px 20px;
+          margin: 8px 10px;
+          color: #ffffff;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          border-left: 2px solid #6e44ff;
+          transition: all 0.3s ease;
+          position: relative;
+          background: rgba(110, 68, 255, 0.2);
+          border-radius: 0 6px 6px 0;
+          font-size: 14px;
+          box-shadow: 0 0 10px rgba(110, 68, 255, 0.3);
+      }
 
-        /* Активная кнопка (текущая страница) */
-        .menu-item.active {
-            background: rgba(110, 68, 255, 0.4);
-            border-left: 2px solid #e0e0e0;
-        }
+      /* Активная кнопка (текущая страница) */
+      .menu-item.active {
+          background: rgba(110, 68, 255, 0.4);
+          border-left: 2px solid #e0e0e0;
+      }
 
-        .menu-item.active:after {
-            content: '>';
-            position: absolute;
-            right: 15px;
-            animation: blink 1s infinite;
-            color: #6e44ff;
-        }
+      .menu-item.active:after {
+          content: '>';
+          position: absolute;
+          right: 15px;
+          animation: blink 1s infinite;
+          color: #6e44ff;
+      }
 
-        @keyframes blink {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
-        }
+      @keyframes blink {
+          0%, 100% {
+              opacity: 1;
+          }
+          50% {
+              opacity: 0;
+          }
+      }
 
-        .menu-item:hover {
-            background: rgba(110, 68, 255, 0.3);
-            transform: translateX(5px);
-            box-shadow: 0 0 15px rgba(110, 68, 255, 0.5);
-        }
+      .menu-item:hover {
+          background: rgba(110, 68, 255, 0.3);
+          transform: translateX(5px);
+          box-shadow: 0 0 15px rgba(110, 68, 255, 0.5);
+      }
 
-        .desktop-version-btn {
-            background: transparent !important;
-            border-left: none !important;
-            box-shadow: none !important;
-            opacity: 0.6;
-            margin: 20px 10px 5px;
-            font-size: 13px;
-            display: block;
-            color: #b0b0c0;
-        }
+      .desktop-version-btn {
+          background: transparent !important;
+          border-left: none !important;
+          box-shadow: none !important;
+          opacity: 0.6;
+          margin: 20px 10px 5px;
+          font-size: 13px;
+          display: block;
+          color: #b0b0c0;
+      }
 
-        .desktop-version-btn:hover {
-            margin-top: 20px;
-            opacity: 0.9;
-            background: transparent !important;
-            border-left: none !important;
-            box-shadow: none !important;
-        }
-
-
-        /* Меню-Футер */
-
-        .menu-footer {
-            margin-top: 30px;
-            padding: 0 20px 20px;
-            font-size: 12px;
-            text-align: center;
-            color: rgba(176, 176, 192, 0.7);
-            font-family: 'Courier New', monospace;
-        }
-
-        /* Стили для контента */
-        .content-wrapper {
-            margin-left: 150px;
-            margin-right: 150px;
-            padding: 30px;
-            transition: margin-left 0.3s ease-in-out;
-        }
-
-        /* Стили для заголовка /blog */
-        .blog-header {
-            margin-bottom: 40px;
-            padding-top: 20px;
-        }
-
-        .blog-header h1 {
-            font-size: 2.5rem;
-            color: #6e44ff;
-            margin: 0;
-            padding: 0;
-            text-shadow: 0 0 10px rgba(110, 68, 255, 0.5);
-            position: relative;
-            display: inline-block;
-        }
-
-        .blog-header h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #6e44ff, transparent);
-        }
-
-        /* Стили для сетки статей */
-        .articles-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-
-            gap: 25px;
-        }
-
-        .article-card {
-            background: rgba(15, 15, 26, 0.7);
-            border: 1px solid #6e44ff33;
-            border-left: 3px solid #6e44ff;
-            padding: 25px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            text-decoration: none;
-        }
-
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(110, 68, 255, 0.2);
-            border-color: #6e44ff;
-        }
-
-        .article-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(110, 68, 255, 0.1),
-                    transparent
-            );
-            transition: 0.5s;
-        }
-
-        .article-card:hover::before {
-            left: 100%;
-        }
-
-        .article-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9em;
-            color: #b0b0c0;
-            margin-bottom: 15px;
-        }
-
-        .article-title {
-            font-size: 1.4em;
-            margin: 10px 0;
-            color: #e0e0e0;
-            line-height: 1.4;
-        }
-
-        .article-excerpt {
-            color: #b0b0c0;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .article-tags {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .article-tag {
-            background: rgba(110, 68, 255, 0.15);
-            color: #6e44ff;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            transition: all 0.3s ease;
-        }
-
-        .article-tag:hover {
-            background: rgba(110, 68, 255, 0.3);
-        }
-
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .content-wrapper {
-                margin-left: 0;
-                margin-right: 0;
-                padding: 20px;
-            }
-
-            .cyber-menu {
-                width: 240px;
-                left: -240px;
-            }
-
-            .blog-header h1 {
-                font-size: 2rem;
-            }
+      .desktop-version-btn:hover {
+          margin-top: 20px;
+          opacity: 0.9;
+          background: transparent !important;
+          border-left: none !important;
+          box-shadow: none !important;
+      }
 
 
-        }
+      /* Меню-Футер */
 
-        @media (max-width: 480px) {
-            .content-wrapper {
-                margin-left: 0;
-                margin-right: 0;
-                padding: 20px;
-            }
+      .menu-footer {
+          margin-top: 30px;
+          padding: 0 20px 20px;
+          font-size: 12px;
+          text-align: center;
+          color: rgba(176, 176, 192, 0.7);
+          font-family: 'Courier New', monospace;
+      }
 
-            .article-card {
-                padding: 15px;
-            }
+      /* Стили для контента */
+      .content-wrapper {
+          margin-left: 150px;
+          margin-right: 150px;
+          padding: 30px;
+          transition: margin-left 0.3s ease-in-out;
+      }
 
-            .article-title {
-                font-size: 1.2em;
-            }
+      /* Стили для заголовка /blog */
+      .blog-header {
+          margin-bottom: 40px;
+          padding-top: 20px;
+      }
 
-            .blog-header h1 {
-                font-size: 1.8rem;
-            }
+      .blog-header h1 {
+          font-size: 2.5rem;
+          color: #6e44ff;
+          margin: 0;
+          padding: 0;
+          text-shadow: 0 0 10px rgba(110, 68, 255, 0.5);
+          position: relative;
+          display: inline-block;
+      }
 
-            .cyber-menu {
-                width: 240px;
-                left: -240px;
-            }
+      .blog-header h1::after {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, #6e44ff, transparent);
+      }
 
-            .menu-scrollable {
-                padding-top: 60px;
-            }
+      /* Стили для сетки статей */
+      .articles-grid {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: grid;
 
-            .menu-tooltip {
-                font-size: 12px;
-            }
-        }
-    </style>
+          gap: 25px;
+      }
+
+      .article-card {
+          background: rgba(15, 15, 26, 0.7);
+          border: 1px solid #6e44ff33;
+          border-left: 3px solid #6e44ff;
+          padding: 25px;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+          border-radius: 8px;
+          text-decoration: none;
+      }
+
+      .article-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 30px rgba(110, 68, 255, 0.2);
+          border-color: #6e44ff;
+      }
+
+      .article-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(
+                  90deg,
+                  transparent,
+                  rgba(110, 68, 255, 0.1),
+                  transparent
+          );
+          transition: 0.5s;
+      }
+
+      .article-card:hover::before {
+          left: 100%;
+      }
+
+      .article-meta {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.9em;
+          color: #b0b0c0;
+          margin-bottom: 15px;
+      }
+
+      .article-title {
+          font-size: 1.4em;
+          margin: 10px 0;
+          color: #e0e0e0;
+          line-height: 1.4;
+      }
+
+      .article-excerpt {
+          color: #b0b0c0;
+          line-height: 1.6;
+          margin-bottom: 15px;
+      }
+
+      .article-tags {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+      }
+
+      .article-tag {
+          background: rgba(110, 68, 255, 0.15);
+          color: #6e44ff;
+          padding: 5px 12px;
+          border-radius: 15px;
+          font-size: 0.8em;
+          transition: all 0.3s ease;
+      }
+
+      .article-tag:hover {
+          background: rgba(110, 68, 255, 0.3);
+      }
+
+      /* Адаптивность */
+      @media (max-width: 768px) {
+          .content-wrapper {
+              margin-left: 0;
+              margin-right: 0;
+              padding: 20px;
+          }
+
+          .cyber-menu {
+              width: 240px;
+              left: -240px;
+          }
+
+          .blog-header h1 {
+              font-size: 2rem;
+          }
+
+
+      }
+
+      @media (max-width: 480px) {
+          .content-wrapper {
+              margin-left: 0;
+              margin-right: 0;
+              padding: 20px;
+          }
+
+          .article-card {
+              padding: 15px;
+          }
+
+          .article-title {
+              font-size: 1.2em;
+          }
+
+          .blog-header h1 {
+              font-size: 1.8rem;
+          }
+
+          .cyber-menu {
+              width: 240px;
+              left: -240px;
+          }
+
+          .menu-scrollable {
+              padding-top: 60px;
+          }
+
+          .menu-tooltip {
+              font-size: 12px;
+          }
+      }
+  </style>
 </head>
 <body>
 <!-- Меню -->
 <div class="menu-toggle">
-    <span></span>
-    <span></span>
-    <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
 </div>
 
 <nav class="cyber-menu">
-    <div class="menu-scrollable">
-        <a href="index.html" class="menu-item">
-            <span class="menu-icon">⌂</span> &nbsp;INDEX.html
-        </a>
+  <div class="menu-scrollable">
+    <a href="index.html" class="menu-item">
+      <span class="menu-icon">⌂</span> &nbsp;INDEX.html
+    </a>
 
-        <a href="projects.html" class="menu-item">
-            <span class="menu-icon">🚀</span> &nbsp;Projects
-        </a>
+    <a href="projects.html" class="menu-item">
+      <span class="menu-icon">🚀</span> &nbsp;Projects
+    </a>
 
-        <a href="blog.html" class="menu-item active">
-            <span class="menu-icon">📝</span> &nbsp;Blog
-        </a>
+    <a href="blog.html" class="menu-item active">
+      <span class="menu-icon">📝</span> &nbsp;Blog
+    </a>
 
-        <a href="contacts.html" class="menu-item">
-            <span class="menu-icon">📧</span> &nbsp;>_Contact
-        </a>
-        <div class="menu-footer">
+    <a href="contacts.html" class="menu-item">
+      <span class="menu-icon">📧</span> &nbsp;>_Contact
+    </a>
+    <div class="menu-footer">
 
-        </div>
-
-        <div class="menu-footer">
-            © 2026 | Feel free to copy anything*
-        </div>
     </div>
+
+    <div class="menu-footer">
+      AABarabanov · 2026
+    </div>
+  </div>
 </nav>
 
 <!-- Контент с карточками -->
 <div class="content-wrapper">
-    <!-- Заголовок /blog -->
-    <div class="blog-header">
-        <h1>&ensp;&ensp;&ensp;&ensp;/blog</h1>
-    </div>
+  <!-- Заголовок /blog -->
+  <div class="blog-header">
+    <h1>&ensp;&ensp;&ensp;&ensp;/blog</h1>
+  </div>
 
-    <div class="articles-grid">
-        <!-- Статья -->
-        <a href="articles/ai_as_your_digital_mirror.html" class="article-card">
-            <div class="article-meta">
-                <span>18.05.2025</span>
-                <span>2 мин</span>
-            </div>
-            <h2 class="article-title">AI — зеркало пользователя</h2>
-            <p class="article-excerpt">Когда-то ИИ был просто инструментом — безликим и предсказуемым. Сегодня он стал
-                чем-то бОльшим...</p>
-            <div class="article-tags">
-                <span class="article-tag">#ИИ</span>
-                <span class="article-tag">#ЦифровоеОтражение</span>
-                <span class="article-tag">#ПсихологияТехнологий</span>
-                <span class="article-tag">#Этика</span>
-            </div>
-        </a>
-    </div>
+  <div class="articles-grid">
+    <!-- Статья -->
+    <a href="articles/ai_as_your_digital_mirror.html" class="article-card">
+      <div class="article-meta">
+        <span>18.05.2025</span>
+        <span>2 мин</span>
+      </div>
+      <h2 class="article-title">AI — зеркало пользователя</h2>
+      <p class="article-excerpt">Когда-то ИИ был просто инструментом — безликим и предсказуемым. Сегодня он стал
+        чем-то бОльшим...</p>
+      <div class="article-tags">
+        <span class="article-tag">#ИИ</span>
+        <span class="article-tag">#ЦифровоеОтражение</span>
+        <span class="article-tag">#ПсихологияТехнологий</span>
+        <span class="article-tag">#Этика</span>
+      </div>
+    </a>
+  </div>
 </div>
 
 
