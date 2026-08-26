@@ -147,28 +147,6 @@
           box-shadow: 0 0 15px rgba(110, 68, 255, 0.5);
       }
 
-      .desktop-version-btn {
-          background: transparent !important;
-          border-left: none !important;
-          box-shadow: none !important;
-          opacity: 0.6;
-          margin: 20px 10px 5px;
-          font-size: 13px;
-          display: block;
-          color: #b0b0c0;
-      }
-
-      .desktop-version-btn:hover {
-          margin-top: 20px;
-          opacity: 0.9;
-          background: transparent !important;
-          border-left: none !important;
-          box-shadow: none !important;
-      }
-
-
-      /* Меню-Футер */
-
       .menu-footer {
           margin-top: 30px;
           padding: 0 20px 20px;
@@ -348,9 +326,7 @@
               padding-top: 60px;
           }
 
-          .menu-tooltip {
-              font-size: 12px;
-          }
+
       }
   </style>
 </head>
@@ -389,15 +365,31 @@
   </div>
 </nav>
 
-<!-- Контент с карточками -->
 <div class="content-wrapper">
-  <!-- Заголовок /blog -->
   <div class="blog-header">
     <h1>&ensp;&ensp;&ensp;&ensp;/blog</h1>
   </div>
 
   <div class="articles-grid">
-    <!-- Статья -->
+    <a href="articles/uuu.html" class="article-card">
+      <div class="article-meta">
+        <span>24.08.2026</span>
+        <span>3 мин</span>
+      </div>
+      <h2 class="article-title">Принцип 3-х У. Паттерны проектирования: Зачем они нужны?</h2>
+      <p class="article-excerpt">Или почему паттерны — это не «модные словечки», а рабочий инструмент</p>
+      <div class="article-tags">
+        <span class="article-tag">#паттерны</span>
+        <span class="article-tag">#архитектура</span>
+        <span class="article-tag">#java</span>
+        <span class="article-tag">#чистый_код</span>
+        <span class="article-tag">#разработкаa</span>
+        <span class="article-tag">#программирование</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="articles-grid">
     <a href="articles/ai_as_your_digital_mirror.html" class="article-card">
       <div class="article-meta">
         <span>18.05.2025</span>
@@ -415,7 +407,6 @@
     </a>
   </div>
 </div>
-
 
 <script>
     // Скрипт для меню
