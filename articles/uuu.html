@@ -151,24 +151,9 @@
           box-shadow: 0 0 15px rgba(110, 68, 255, 0.5);
       }
 
-      .desktop-version-btn {
-          background: transparent !important;
-          border-left: none !important;
-          box-shadow: none !important;
-          opacity: 0.6;
-          margin: 20px 10px 5px;
-          font-size: 13px;
-          display: block;
-          color: #b0b0c0;
-      }
 
-      .desktop-version-btn:hover {
-          margin-top: 20px;
-          opacity: 0.9;
-          background: transparent !important;
-          border-left: none !important;
-          box-shadow: none !important;
-      }
+
+
 
       .menu-footer {
           margin-top: 30px;
@@ -264,15 +249,60 @@
           background-color: #6e44ff;
       }
 
+      /* "Поделиться" */
+      .share-btn {
+          position: relative;
+          overflow: hidden;
+          padding: 12px 28px;
+          background: rgba(0, 0, 0, 0.2);
+          color: #b0b0c0;
+          border: none;
+          border-radius: 8px 8px 8px 8px;
+          cursor: pointer;
+          font-size: 14px;
+          font-family: 'Courier New', monospace;
+          transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+      }
+
+      /* Бегущая полоса */
+      .share-btn:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 60%;
+          height: 100%;
+          background: linear-gradient(90deg,
+          transparent,
+          rgba(110, 68, 255, 0.4),
+          transparent);
+          transition: 0.6s;
+      }
+
+      /* При наведении */
+      .share-btn:hover:before {
+          left: 140%;
+      }
+
+      .share-btn:hover {
+          color: #ffffff;
+          background: rgba(110, 68, 255, 0.2);
+
+          transform: translateX(10px);
+          box-shadow: 5px 0 15px rgba(110, 68, 255, 0.5);
+      }
+
       @media (max-width: 480px) {
           .cyber-menu {
               width: 240px;
               left: -240px;
           }
 
-          .corner-banner {
-              width: 80px;
-          }
+
 
           .menu-scrollable {
               padding-top: 60px;
@@ -294,11 +324,7 @@
               left: 10px;
           }
 
-          .corner-banner {
-              top: 10px;
-              right: 10px;
-              width: 80px;
-          }
+
       }
 
       /* Для очень маленьких экранов */
@@ -451,6 +477,23 @@
       <p>Если ты до сих пор не используешь паттерны — попробуй. Начни с малого. И ты заметишь, как изменится твой код и
         отношение к нему.
       </p>
+
+      <div style="text-align: right; margin-top: 20px;">
+
+        <button id="shareBtn" class="share-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+          Поделиться
+        </button>
+
+      </div>
+
     </div>
     <div class="article-tags">
       #паттерны #архитектура #java #чистый_код #разработка #программирование
@@ -459,6 +502,11 @@
 </div>
 
 <button id="scrollTopBtn" title="Наверх">↑</button>
+
+<!--<button id="shareBtn"-->
+<!--        style="padding: 10px 20px; background: #6e44ff; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 20px;">-->
+<!--  Поделиться-->
+<!--</button>-->
 
 <script>
     // Управление меню
@@ -504,5 +552,22 @@
         });
     });
 </script>
+
+<script>
+    document.getElementById('shareBtn').addEventListener('click', async () => {
+        try {
+            await navigator.share({
+                title: document.title, // Заголовок страницы
+                text: 'Принцип 3-х У. Паттерны проектирования',
+                url: window.location.href // Ссылка на страницу
+            });
+        } catch (err) {
+            if (err.name !== 'AbortError') {
+                console.error('Ошибка:', err);
+            }
+        }
+    });
+</script>
+
 </body>
 </html>
